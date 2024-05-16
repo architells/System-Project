@@ -24,6 +24,8 @@
         </div>
     </nav>
 
+    
+
 <!----------------------------- Form box ----------------------------------->    
     <div class="form-box">
 
@@ -80,6 +82,10 @@
                 <div class="two-forms">
                     <div class="input-box">
                         <input type="text" class="input-field" name="fname" placeholder="Firstname">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" name="mname" placeholder="Middle Name">
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
