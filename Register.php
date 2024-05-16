@@ -32,19 +32,19 @@ if(isset($_POST['fname']) && isset($_POST['lname']) &&
 
     // Check if any required field is empty
     if(empty($fname)){
-        header("Location: Register.php?error=Firstname is empty"); // Redirect with an error message
+        header("Location: Front-Page.php?error=Firstname is empty"); // Redirect with an error message
         exit();
     } else if(empty($lname)){
-        header("Location: Register.php?error=Lastname is empty"); // Redirect with an error message
+        header("Location: Front-Page.php?error=Lastname is empty"); // Redirect with an error message
         exit();
     } else if(empty($email)){
-        header("Location: Register.php?error=Email is empty"); // Redirect with an error message
+        header("Location: Front-Page.php?error=Email is empty"); // Redirect with an error message
         exit();
     } else if(empty($s_ID)){
-        header("Location: Register.php?error=Student ID is empty"); // Redirect with an error message
+        header("Location: Front-Page.php?error=Student ID is empty"); // Redirect with an error message
         exit();
     } else if(empty($pass)){
-        header("Location: Register.php?error=Password is empty"); // Redirect with an error message
+        header("Location: Front-Page.php?error=Password is empty"); // Redirect with an error message
         exit();
     } else {
         // Hash the password using bcrypt
@@ -60,7 +60,7 @@ if(isset($_POST['fname']) && isset($_POST['lname']) &&
             header("Location: Front-Page.php"); // Redirect to the front page on successful registration
             exit();
         } else {
-            header("Location: Register.php?error=Registration Failed"); // Redirect with an error message
+            header("Location: Front-Page.php?error=Registration Failed"); // Redirect with an error message
             exit();
         }
     }

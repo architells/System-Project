@@ -80,10 +80,10 @@ if (isset($_POST['Pnum']) && isset($_POST['month']) &&
         exit();
     }
 
-        $user_id = $_SESSION['user_id'];
+        $ID = $_SESSION['ID'];
 
         // Fetch user information
-        $sql = "SELECT * FROM user WHERE user_id='$user_id'";
+        $sql = "SELECT * FROM user WHERE ID='$ID'";
         $result = mysqli_query($conn, $sql);
 
         // Fetch user profile information

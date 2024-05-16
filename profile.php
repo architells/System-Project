@@ -11,6 +11,7 @@ if (isset($_SESSION['ID'])) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="dumbbell.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>User Profile</title>
 
