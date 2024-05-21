@@ -79,6 +79,11 @@
                 
                 <header>Sign Up</header>
             </div>
+            <?php if (isset($_GET['error'])) { ?>
+                <div class="alert-alert-danger" style=" opacity:0.5; text-align :center; padding: 5px; background-color: red; border-radius: 10px;  margin-bottom:10px;">
+                    <?php echo $_GET['error']; ?>
+                </div>
+            <?php } ?>
             
             <form action="Register.php" method="post">
                 <div class="two-forms">

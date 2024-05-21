@@ -3,8 +3,8 @@ session_start();
 include "db_conn.php";
 
 // Check if the form is submitted with required fields
-if(isset($_POST['fname']) && isset($_POST['lname']) && 
-   isset($_POST['s_ID']) && isset($_POST['email']) && 
+if(isset($_POST['fname']) && isset($_POST['mname']) && isset($_POST['lname']) && 
+   isset($_POST['s_ID']) && isset($_POST['email']) && isset($_POST['role']) && 
    isset($_POST['password'])){
 
     /**
@@ -25,44 +25,62 @@ if(isset($_POST['fname']) && isset($_POST['lname']) &&
 
     // Validate and sanitize input
     $fname = validate($_POST['fname']);
+    $mname = validate($_POST['mname']);
     $lname = validate($_POST['lname']);
     $email = validate($_POST['email']);
     $s_ID = validate($_POST['s_ID']);
+    $role = validate($_POST['role']);
     $pass = validate($_POST['password']);
 
     // Check if any required field is empty
     if(empty($fname)){
-        header("Location: Front-Page.php?error=Firstname is empty"); // Redirect with an error message
+        header("Location: Register-form.php?error=Firstname is empty"); // Redirect with an error message
+        exit();
+    } else if(empty($mname)){
+        header("Location: Register-form.php?error=Middle name is empty"); // Redirect with an error message
         exit();
     } else if(empty($lname)){
-        header("Location: Front-Page.php?error=Lastname is empty"); // Redirect with an error message
+        header("Location: Register-form.php?error=Lastname is empty"); // Redirect with an error message
         exit();
-    } else if(empty($email)){
-        header("Location: Front-Page.php?error=Email is empty"); // Redirect with an error message
+    }else if(empty($email)){
+        header("Location: Register-form.php?error=Email is empty"); // Redirect with an error message
         exit();
     } else if(empty($s_ID)){
-        header("Location: Front-Page.php?error=Student ID is empty"); // Redirect with an error message
+        header("Location: Register-form.php?error=Student ID is empty"); // Redirect with an error message
         exit();
-    } else if(empty($pass)){
-        header("Location: Front-Page.php?error=Password is empty"); // Redirect with an error message
+    } else if(empty($role)){
+        header("Location: Register-form.php?error=Role is empty"); // Redirect with an error message
+        exit();
+    }else if(empty($pass)){
+        header("Location: Register-form.php?error=Password is empty"); // Redirect with an error message
         exit();
     } else {
         // Hash the password using bcrypt
         $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
-        
+        $sqlCheckID = "SELECT * FROM students WHERE Student_ID='$s_ID' OR Email='$email'";
+        $check = mysqli_query($conn, $sqlCheckID);
+        if(mysqli_num_rows($check) > 0){
+            header("Location: register-form.php?error=Student ID or Email is already taken");
+            exit();
+        }else{
+
         // Insert user data into the database
-        $sql = "INSERT INTO students(First_name, Last_name, Email, Student_ID, Password) 
-                VALUES('$fname','$lname','$email','$s_ID','$hashed_pass')";
+        $sql = "INSERT INTO students (First_name, Middle_name, Last_name, Student_ID, Email, Role, Password) 
+                VALUES ('$fname', '$mname', '$lname', '$s_ID', '$email', '$role', '$hashed_pass')";
         $result = mysqli_query($conn, $sql);
 
         // Check if the insertion was successful
         if($result){
-            header("Location: Front-Page.php"); // Redirect to the front page on successful registration
+            header("Location: register-form.php?success=Your account has been created successfully");
             exit();
         } else {
-            header("Location: Front-Page.php?error=Registration Failed"); // Redirect with an error message
+            header("Location: register-form.php?error=An error occurred while creating your account");
             exit();
         }
     }
+}
+}else{
+    header("Location: register-form.php");
+    exit();
 }
 ?>

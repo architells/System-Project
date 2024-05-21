@@ -7,4 +7,4 @@ session_unset();
 session_destroy();
 
 // Redirect the user to the login form page
-header("Location: Front-Page.php");
+header("Location: Login-form.php");
