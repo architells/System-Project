@@ -126,45 +126,30 @@ if (isset($_SESSION['ID'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <!-- /.col -->
-          <!-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
-            </ol> -->
-          </div><!-- /.col -->
+          
+            
+          <div class="card-body" style="text-align: center; margin-top: 20%; text-indent: -3px;">
+             <h1 style="font-size: 70px">WELCOME BACK, <h1 style="color: blue; font-size: 70px"><?php echo $_SESSION['fname']?></h1>   
+            </div>
+
+
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
+    <!-- Main content --> 
      <div class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6">
            <div class="card">
-            <div class="card-body">
+            <!-- <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
-              <thead>
-                  <tr>
-                    <th>Course_id</th>
-                    <th>Title</th>
-                    <th>Department</th>
-                    <th>Credits</th>
-                    <th>Edit</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td><?php echo $_SESSION['Course_id']; ?></td>
-                    <td><?php echo $_SESSION['Title']; ?>
-                    </td>
-                    <td><?php echo $_SESSION['Department']; ?></td>
-                    <td><?php echo $_SESSION['Credits']; ?></td>
-                    <td>X</td>
-                  </tr>
+              
+                  
               </table>
-            </div>
+            </div> -->
            </div>
 
           

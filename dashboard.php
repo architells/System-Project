@@ -132,8 +132,8 @@ if (isset($_SESSION['ID'])) {
               <li class="breadcrumb-item active">Dashboard v3</li>
             </ol> -->
 
-            <div class="card-body" style="text-align: center; color: blue; margin-top: 20%;">
-             <h1 style="font-size: 70px">WELCOME <?php echo $_SESSION['fname']?></h1>   
+            <div class="card-body" style="text-align: center; margin-top: 20%;">
+             <h1 style="font-size: 70px">WELCOME, <h1 style="font-size: 50px; color: blue;"><?php echo $_SESSION['fname']?></h1>   
             </div>
 
 
