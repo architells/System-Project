@@ -14,7 +14,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin's Dashboard</title>
+    <title>Student's Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -25,7 +25,6 @@ if (isset($_SESSION['ID'])) {
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="admin-style.css">
   </head>
   <!--
 `body` tag options:
@@ -68,7 +67,7 @@ if (isset($_SESSION['ID'])) {
         <a href="#" class="brand-link">
           <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-          <span class="brand-text font-weight-light">Admin</span>
+          <span class="brand-text font-weight-light">STUDENT</span>
         </a>
 
         <!-- Sidebar -->
@@ -86,7 +85,7 @@ if (isset($_SESSION['ID'])) {
               <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block"><?php echo $_SESSION['fname'] . ' ' . ' ' . $_SESSION['lname']; ?></a>
+              <a href="profile.php" class="d-block"><?php echo $_SESSION['fname'] . ' ' . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
@@ -107,7 +106,7 @@ if (isset($_SESSION['ID'])) {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="profile.php" class="nav-link">
                   <p>Profile</p>
                 </a>
               </li>
@@ -130,148 +129,76 @@ if (isset($_SESSION['ID'])) {
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <!-- /.col -->
+              <!-- /.col -->`
+              <!-- <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v3</li>
+            </ol> -->
+
+              <div class="card-body" style="text-align: center; margin-top: 20%;">
+                <h1 style="font-size: 70px">WELCOME, <h1 style="font-size: 50px; color: blue;">
+                    <?php echo $_SESSION['fname'] ?>
+                  </h1>
+              </div>
 
 
-              <!-- <div class="card-body" style="text-align: center; margin-top: 20%; text-indent: -3px;">
-                <h1 style="font-size: 20px">WELCOME BACK, <h1 style="color: blue; font-size: 70px">
-                    <?php echo $_SESSION['fname'] ?></h1>
-              </div> -->
 
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
 
-            </div><!-- /.row -->
-            <div class="container">
-        <div class="section-2">
-            <div class="counter">
-                <h2>Number of Students Logged In Today</h2>
-                <p>5</p>
-            </div>
-        </div>
-        <div class="section-3">
-            <h2>Logged In Students Details</h2>
-            <table>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Login Time</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>john@example.com</td>
-                    <td>2024-05-30 09:00:00</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>jane@example.com</td>
-                    <td>2024-05-30 09:15:00</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Bob Johnson</td>
-                    <td>bob@example.com</td>
-                    <td>2024-05-30 09:30:00</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Alice Brown</td>
-                    <td>alice@example.com</td>
-                    <td>2024-05-30 10:00:00</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Charlie Davis</td>
-                    <td>charlie@example.com</td>
-                    <td>2024-05-30 10:15:00</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-          </div><!-- /.container-fluid -->
-        </div>
-        <!-- <div class="section-2">
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
           <div class="row">
-            <div class="column">
-              <div class="card">
-                <p><i class="fa fa-user"></i></p>
-                <h3 class="counter">12</h3>
-                <h5>student</h5>
-              </div>
+            <div class="col-lg-6">
+
+
+
             </div>
+
           </div>
+          <!-- /.container-fluid -->
         </div>
-        <div class="section-3">
-          <div class="row">
-            <div class="column">
-              <div class="card">
-                <p><i class="fa fa-user"></i></p>
-                <h3 class="counter-2">12</h3>
-                <h5>admin</h5>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        
-        <!-- /.content-header -->
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
 
-        <!-- Main content -->
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="card">
-                  <!-- <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-              
-                  
-              </table>
-            </div> -->
-                </div>
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
 
-
-              </div>
-
-            </div>
-            <!-- /.container-fluid -->
-          </div>
-          <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-          <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-
-        <!-- Main Footer -->
-        <!-- <footer class="main-footer">
+      <!-- Main Footer -->
+      <!-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
   </footer> -->
-      </div>
-      <!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
-      <!-- REQUIRED SCRIPTS -->
+    <!-- REQUIRED SCRIPTS -->
 
-      <!-- jQuery -->
-      <script src="plugins/jquery/jquery.min.js"></script>
-      <!-- Bootstrap -->
-      <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <!-- AdminLTE -->
-      <script src="dist/js/adminlte.js"></script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="dist/js/adminlte.js"></script>
 
-      <!-- OPTIONAL SCRIPTS -->
-      <script src="plugins/chart.js/Chart.min.js"></script>
-      <!-- AdminLTE for demo purposes -->
-      <script src="dist/js/demo.js"></script>
-      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-      <script src="dist/js/pages/dashboard3.js"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="plugins/chart.js/Chart.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard3.js"></script>
   </body>
 
   </html>

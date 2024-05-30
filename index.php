@@ -58,7 +58,7 @@ if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){
                 if ($role == 'admin') {
                     header("Location: dashboard-Admin.php"); // Redirect to admin dashboard
                 } else {
-                    header("Location: dashboard.php"); // Redirect to student dashboard
+                    header("Location: dashboard-Student.php"); // Redirect to student dashboard
                 }
                 exit();
             } else {

@@ -22,7 +22,7 @@
             </div>
         <?php } ?>
         <form action="index.php" method="post">
-            <label for="student-id">Student ID:</label>
+            <label for="student-id">ID NUMBER:</label>
             <input type="text" id="student-id" name="s_ID">
             
             <label for="password">Password:</label>
