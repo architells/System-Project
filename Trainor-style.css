@@ -1,0 +1,39 @@
+.container-trainor {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.container-trainor .column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px; /* Optional: Add some space between columns */
+}
+
+.container-trainor img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.holder {
+    display: flex;
+    position: relative; /* Added position relative to use absolute positioning inside */
+    align-items: flex-start;
+    background-color: gray;
+    opacity: 0.5;
+    height: 200px;
+    width: 1000px;
+    margin-left: 10px; /* Space between the image and the holder */
+}
+
+.holder h1 {
+    position: absolute; /* Position the p element absolutely within the holder */
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    color: white;
+}

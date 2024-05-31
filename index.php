@@ -50,6 +50,7 @@ if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){
                 // Set session variables on successful login
                 $_SESSION['ID'] = $row['ID'];
                 $_SESSION['fname'] = $row['First_name'];
+                $_SESSION['mname'] = $row['Middle_name'];
                 $_SESSION['lname'] = $row['Last_name'];
                 $_SESSION['s_ID'] = $row['Student_ID'];
                 $_SESSION['email'] = $row['Email'];
@@ -71,7 +72,7 @@ if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){
         }
     }
 }else{
-    header("Location: ../Login-form.php"); // Redirect if the form is not submitted properly
+    header("Location: Login-form.php"); // Redirect if the form is not submitted properly
     exit();
 }
 

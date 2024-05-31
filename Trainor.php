@@ -12,31 +12,22 @@ if (isset($_SESSION['ID'])) {
 
   <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student's Dashboard</title>
+    <title>AdminLTE 3 | Blank Page</title>
 
     <!-- Google Font: Source Sans Pro -->
+    <link rel="shortcut icon" href="dumbbell.png">
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- IonIcons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="Trainor-style.css">
   </head>
-  <!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 
   <body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
     <div class="wrapper">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -46,20 +37,21 @@ if (isset($_SESSION['ID'])) {
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <h2 class="m-0">Dashboard</h2>
+            <a href="dashboard-Student.php" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Contact</a>
           </li>
         </ul>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <form action="logout.php" method="post" style="display: inline;">
-            <button class="btn btn-primary" type="submit">Logout</button>
-          </form>
+          <!-- Navbar Search -->
 
 
-
+        </ul>
       </nav>
-
+      <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -72,7 +64,7 @@ if (isset($_SESSION['ID'])) {
 
         <!-- Sidebar -->
         <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
+          <!-- Sidebar user (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <?php
             if (isset($_SESSION['Profile_picture']) && !empty($_SESSION['Profile_picture'])) {
@@ -92,21 +84,13 @@ if (isset($_SESSION['ID'])) {
           </div>
 
           <!-- SidebarSearch Form -->
-          <!-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> -->
+
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+              <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
               <li class="nav-item">
                 <a href="profile.php" class="nav-link">
                   <p>Profile</p>
@@ -124,7 +108,6 @@ if (isset($_SESSION['ID'])) {
                   <p>Trainor</p>
                 </a>
               </li>
-
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -135,83 +118,94 @@ if (isset($_SESSION['ID'])) {
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <!-- /.col -->`
-              <!-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
-            </ol> -->
+              <div class="col-sm-6">
+                <h1>Trainor</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
 
-              <div class="card-body" style="text-align: center; margin-top: 20%;">
-                <h1 style="font-size: 70px">WELCOME, <h1 style="font-size: 50px; color: blue;">
-                    <?php echo $_SESSION['fname'] ?>
-                  </h1>
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">No buddy? Choose here!</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="container-trainor">
+                <div class="row">
+                  <div class="column">
+                    <img src="BINI GWEN.jpg" alt="Gwen">
+                    <div class="holder">
+                      <h1>Bini Gwen</h1>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
 
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-6">
-
-
-
             </div>
-
+            <!-- /.card-body -->
+            <div class="card-footer">
+              .
+            </div>
+            <!-- /.card-footer-->
           </div>
-          <!-- /.container-fluid -->
-        </div>
+          <!-- /.card -->
+
+        </section>
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
+
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.2.0
+        </div>
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+      </footer>
 
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
       </aside>
       <!-- /.control-sidebar -->
-
-      <!-- Main Footer -->
-      <!-- <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer> -->
     </div>
     <!-- ./wrapper -->
 
-    <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
+    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE -->
-    <script src="dist/js/adminlte.js"></script>
-
-    <!-- OPTIONAL SCRIPTS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard3.js"></script>
   </body>
 
   </html>
-
   <?php
 } else {
   // If the user is not logged in, redirect to the login page

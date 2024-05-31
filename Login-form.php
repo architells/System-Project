@@ -37,7 +37,6 @@
             <button type="submit">Login</button>
         </form>
         <h5>Don't have an account? <a href="register-form.php">Register here</a>.</h5>
-        <h5>Verify your account <a href="success.php">Click here</a>.</h5>
     </div>
 </body>
 </html>
