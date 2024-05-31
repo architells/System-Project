@@ -143,12 +143,12 @@ if (isset($_SESSION['ID'])) {
             <div class="container">
         <div class="section-2">
             <div class="counter">
-                <h2>Number of Students Logged In Today</h2>
+                <h2>Number of Students Logged In</h2>
                 <p>5</p>
             </div>
         </div>
         <div class="section-3">
-            <h2>Logged In Students Details</h2>
+            <!-- <h2>Logged In Students Details</h2> -->
             <table>
                 <tr>
                     <th>Student ID</th>

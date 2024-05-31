@@ -17,7 +17,7 @@
     <div class="login-container">
         <h2>Login</h2>
         <?php if (isset($_GET['error'])) { ?>
-            <div class="alert alert-danger" style="opacity:0.5; text-align: center; padding: 5px; background-color: red; border-radius: 10px; margin-bottom: 10px;">
+            <div class="alert alert-danger">
                 <?php echo $_GET['error']; ?>
             </div>
         <?php } ?>
@@ -37,6 +37,7 @@
             <button type="submit">Login</button>
         </form>
         <h5>Don't have an account? <a href="register-form.php">Register here</a>.</h5>
+        <h5>Verify your account <a href="success.php">Click here</a>.</h5>
     </div>
 </body>
 </html>

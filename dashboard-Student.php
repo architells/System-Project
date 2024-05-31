@@ -64,7 +64,7 @@ if (isset($_SESSION['ID'])) {
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link">
+        <a href="dashboard-Student.php" class="brand-link">
           <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
           <span class="brand-text font-weight-light">STUDENT</span>
@@ -116,6 +116,13 @@ if (isset($_SESSION['ID'])) {
                   <p>Updates</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <p>Trainor</p>
+                </a>
+              </li>
+
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

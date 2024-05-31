@@ -54,7 +54,7 @@ if (isset($_POST['v_code'])) {
                 $stmt = mysqli_prepare($conn, $update);
                 mysqli_stmt_bind_param($stmt, "s", $email);
                 if (mysqli_stmt_execute($stmt)) {
-                    header("Location: Front-Page.php?success=Email validated successfully");
+                    header("Location: Login-form.php?success=Email validated successfully");
                     exit();
                 }
             } else {

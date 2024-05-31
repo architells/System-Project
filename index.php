@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../db_conn.php";
+include "db_conn.php";
 
 // Check if the form is submitted with required fields
 if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){

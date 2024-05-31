@@ -1,6 +1,5 @@
 * {  
     margin: 0;
-    
     box-sizing: border-box;
 }
 
@@ -8,10 +7,6 @@ body {
     background: url("PIC_SET.jpg") no-repeat center center fixed;
     background-size: cover;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     font-family: Arial, sans-serif;
 }
 
@@ -28,7 +23,6 @@ body {
     text-indent: -600px;
 }
 
-
 .nav-logo p {
     color: white;
     font-size: 25px;
@@ -40,7 +34,8 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -56,15 +51,19 @@ body {
 
 .login-container input,
 .login-container select {
-    width: calc(100% - 22px); /* To ensure proper padding */
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.login-container button {
+.same-length {
     width: 100%;
+    max-width: 400px; /* Ensure the same maximum width */
+}
+
+.login-container button {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -83,7 +82,8 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     text-align: center;
 }
 
@@ -99,7 +99,7 @@ body {
 
 .register-container input,
 .register-container select {
-    width: calc(100% - 22px); /* To ensure proper padding */
+    width: calc(100% - 20px); /* To ensure proper padding */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -138,10 +138,10 @@ body {
     color: white;
 }
 
-h5{
+h5 {
     padding-top: 10px;
 }
 
-a:hover{
+a:hover {
     color: blue;
 }

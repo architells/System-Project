@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym Registration</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="nav">
@@ -17,12 +17,12 @@
     <div class="register-container">
         <h2>Register</h2>
         <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-danger" style=" opacity:0.5; text-align :center; padding: 5px; background-color: Green; border-radius: 10px;  margin-bottom:10px;">
+                <div class="alert alert-danger">
                     <?php echo $_GET['success']; ?>
                 </div>
             <?php } ?>
         <?php if (isset($_GET['error'])) { ?>
-                <div class="alert alert-danger" style=" opacity: 0.5; text-align :center; padding: 5px; background-color: red; border-radius: 10px;  margin-bottom:10px;">
+                <div class="alert alert-danger">
                     <?php echo $_GET['error']; ?>
                 </div>
             <?php } ?>
