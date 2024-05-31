@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db_conn.php";
+include "../db_conn.php";
 
 // Check if the form is submitted with required fields
 if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){
@@ -71,7 +71,7 @@ if(isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role'])){
         }
     }
 }else{
-    header("Location: Login-form.php"); // Redirect if the form is not submitted properly
+    header("Location: ../Login-form.php"); // Redirect if the form is not submitted properly
     exit();
 }
-?>
+
