@@ -1,13 +1,24 @@
-* {  
+* {
     margin: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
     background: url("PIC_SET.jpg") no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 .nav {
@@ -37,6 +48,7 @@ body {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    margin: 20px; /* Add margin for better spacing on smaller screens */
 }
 
 .login-container h2 {
@@ -58,12 +70,8 @@ body {
     border-radius: 5px;
 }
 
-.same-length {
-    width: 100%;
-    max-width: 400px; /* Ensure the same maximum width */
-}
-
 .login-container button {
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -144,4 +152,49 @@ h5 {
 
 a:hover {
     color: blue;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .login-container,
+    .register-container {
+        width: 90%;
+        max-width: none;
+    }
+
+    .nav {
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .nav-logo p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container,
+    .register-container {
+        padding: 10px;
+    }
+
+    .login-container h2,
+    .register-container h2 {
+        font-size: 18px;
+    }
+
+    .nav {
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .nav-logo p {
+        font-size: 18px;
+    }
+
+    .login-container button,
+    .register-container button {
+        font-size: 14px;
+        padding: 8px;
+    }
 }

@@ -36,7 +36,7 @@
             <label for="last-name">Last Name:</label>
             <input type="text" id="last-name" name="lname">
 
-            <label for="student-id">Student ID:</label>
+            <label for="student-id">ID NUMBER:</label>
             <input type="text" id="student-id" name="s_ID">
             
             <label for="email">Email:</label>
