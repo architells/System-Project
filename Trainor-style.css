@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 20px; /* Optional: Add some space between columns */
+    margin-right: 20px; 
 }
 
 .container-trainor img {
@@ -22,18 +22,18 @@
 
 .holder {
     display: flex;
-    position: relative; /* Added position relative to use absolute positioning inside */
+    position: relative; 
     align-items: flex-start;
     background-color: gray;
     opacity: 0.5;
     height: 200px;
     width: 1000px;
-    margin-left: 10px; /* Space between the image and the holder */
+    margin-left: 10px; 
 }
 
 .holder h1 {
-    position: absolute; /* Position the p element absolutely within the holder */
-    top: 10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
+    position: absolute; 
+    top: 10px;
+    left: 10px; 
     color: white;
 }

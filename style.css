@@ -48,7 +48,7 @@ body {
     width: 100%;
     max-width: 400px;
     text-align: center;
-    margin: 20px; /* Add margin for better spacing on smaller screens */
+    margin: 20px; 
 }
 
 .login-container h2 {
@@ -107,7 +107,7 @@ body {
 
 .register-container input,
 .register-container select {
-    width: calc(100% - 20px); /* To ensure proper padding */
+    width: calc(100% - 20px); 
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;

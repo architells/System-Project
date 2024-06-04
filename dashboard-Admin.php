@@ -21,6 +21,7 @@ if (isset($_SESSION['ID'])) {
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -83,10 +84,11 @@ if (isset($_SESSION['ID'])) {
             }
             ?>
             <div class="image">
-              <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image">
+              <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image"
+              style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="#" class="d-block"><?php echo $_SESSION['fname'] . ' ' . ' ' . $_SESSION['lname']; ?></a>
+              <a href="#" class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
@@ -108,13 +110,15 @@ if (isset($_SESSION['ID'])) {
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <p>Profile</p>
+                <i class="bi bi-person-lines-fill"></i>
+                  <p>&nbsp;&nbsp;Profile</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>Updates</p>
+                <a href="Announcement.php" class="nav-link">
+                <i class="bi bi-megaphone-fill"></i>
+                  <p>&nbsp;&nbsp;Announcement</p>
                 </a>
               </li>
             </ul>
@@ -141,54 +145,58 @@ if (isset($_SESSION['ID'])) {
 
             </div><!-- /.row -->
             <div class="container">
-        <div class="section-2">
-            <div class="counter">
-                <h2>Number of Students Logged In</h2>
-                <p>5</p>
-            </div>
-        </div>
-        <div class="section-3">
-            <!-- <h2>Logged In Students Details</h2> -->
-            <table>
-                <tr>
+              <div class="section-2">
+                <div class="counter">
+                  <h2>Number of Students Logged In</h2>
+                  <p>5</p>
+                </div>
+              </div>
+              <div class="section-3">
+                <!-- <h2>Logged In Students Details</h2> -->
+                <table>
+                  <thead>
+                  <tr>
                     <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Login Time</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>john@example.com</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td><?php echo $_SESSION['s_ID']; ?></td>
+                    <td><?php echo $_SESSION['fname']; ?></td>
+                    <td><?php echo $_SESSION['email']; ?></td>
                     <td>2024-05-30 09:00:00</td>
-                </tr>
-                <tr>
+                  </tr>
+                  <tr>
                     <td>2</td>
                     <td>Jane Smith</td>
                     <td>jane@example.com</td>
                     <td>2024-05-30 09:15:00</td>
-                </tr>
-                <tr>
+                  </tr>
+                  <tr>
                     <td>3</td>
                     <td>Bob Johnson</td>
                     <td>bob@example.com</td>
                     <td>2024-05-30 09:30:00</td>
-                </tr>
-                <tr>
+                  </tr>
+                  <tr>
                     <td>4</td>
                     <td>Alice Brown</td>
                     <td>alice@example.com</td>
                     <td>2024-05-30 10:00:00</td>
-                </tr>
-                <tr>
+                  </tr>
+                  <tr>
                     <td>5</td>
                     <td>Charlie Davis</td>
                     <td>charlie@example.com</td>
                     <td>2024-05-30 10:15:00</td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div><!-- /.container-fluid -->
         </div>
         <!-- <div class="section-2">
@@ -213,7 +221,7 @@ if (isset($_SESSION['ID'])) {
             </div>
           </div>
         </div> -->
-        
+
         <!-- /.content-header -->
 
         <!-- Main content -->
