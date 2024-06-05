@@ -1,7 +1,7 @@
 <?php
 
 // Database connection parameters
-$sname = "localhost: 3307"; // Server name and port
+$sname = "localhost: 3308"; // Server name and port
 $uname = "root";            // Username
 $password = "";             // Password
 
