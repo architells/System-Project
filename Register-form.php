@@ -17,7 +17,7 @@
     <div class="register-container">
         <h2>Register</h2>
         <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-success">
                     <?php echo $_GET['success']; ?>
                 </div>
             <?php } ?>

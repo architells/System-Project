@@ -52,9 +52,10 @@ if (isset($_SESSION['ID'])) {
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <form action="logout.php" method="post" style="display: inline;">
+          <form action="Logout-Students.php" method="post" style="display: inline;">
             <button class="btn btn-primary" type="submit">Logout</button>
           </form>
+        </ul>
 
 
 

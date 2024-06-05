@@ -85,10 +85,11 @@ if (isset($_SESSION['ID'])) {
             ?>
             <div class="image">
               <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image"
-              style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
+                style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="#" class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+              <a href="#"
+                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
@@ -110,14 +111,14 @@ if (isset($_SESSION['ID'])) {
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                <i class="bi bi-person-lines-fill"></i>
+                  <i class="bi bi-person-lines-fill"></i>
                   <p>&nbsp;&nbsp;Profile</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Announcement.php" class="nav-link">
-                <i class="bi bi-megaphone-fill"></i>
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
                 </a>
               </li>
@@ -137,10 +138,6 @@ if (isset($_SESSION['ID'])) {
               <!-- /.col -->
 
 
-              <!-- <div class="card-body" style="text-align: center; margin-top: 20%; text-indent: -3px;">
-                <h1 style="font-size: 20px">WELCOME BACK, <h1 style="color: blue; font-size: 70px">
-                    <?php echo $_SESSION['fname'] ?></h1>
-              </div> -->
 
 
             </div><!-- /.row -->
@@ -148,51 +145,53 @@ if (isset($_SESSION['ID'])) {
               <div class="section-2">
                 <div class="counter">
                   <h2>Number of Students Logged In</h2>
-                  <p>5</p>
+                  <?php
+                  include "db_conn.php";
+                  $count_sql = "SELECT COUNT(*) AS student_count FROM students WHERE Role = 'student' AND Status = 'Online'";
+                  $count_result = $conn->query($count_sql);
+                  $student_count = 0;
+
+                  if ($count_result->num_rows > 0) {
+                    $count_row = $count_result->fetch_assoc();
+                    $student_count = $count_row["student_count"];
+                  }
+                  ?>
+                  <p><?php echo $student_count; ?></p>
                 </div>
               </div>
               <div class="section-3">
                 <!-- <h2>Logged In Students Details</h2> -->
                 <table>
                   <thead>
-                  <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Login Time</th>
-                  </tr>
+
+                    <tr>
+                      <th>Student ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Login Time</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><?php echo $_SESSION['s_ID']; ?></td>
-                    <td><?php echo $_SESSION['fname']; ?></td>
-                    <td><?php echo $_SESSION['email']; ?></td>
-                    <td>2024-05-30 09:00:00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>jane@example.com</td>
-                    <td>2024-05-30 09:15:00</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Bob Johnson</td>
-                    <td>bob@example.com</td>
-                    <td>2024-05-30 09:30:00</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Alice Brown</td>
-                    <td>alice@example.com</td>
-                    <td>2024-05-30 10:00:00</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Charlie Davis</td>
-                    <td>charlie@example.com</td>
-                    <td>2024-05-30 10:15:00</td>
-                  </tr>
+                    <?php
+                    include "db_conn.php";
+                    $sql = "SELECT Student_ID, Last_name, Email, Login_Time FROM students WHERE Role = 'student' AND Status = 'Online'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                      while ($row = $result->fetch_assoc()) {
+                        $LoginTime = date('Y-m-d H:i:s', strtotime($row['Login_Time']))
+                          ?>
+                        <tr>
+                          <td><?php echo htmlspecialchars($row['Student_ID']); ?></td>
+                          <td><?php echo htmlspecialchars($row['Last_name']); ?></td>
+                          <td><?php echo htmlspecialchars($row['Email']); ?></td>
+                          <td><?php echo htmlspecialchars($LoginTime); ?></td>
+                        </tr>
+                        <?php
+                      }
+                    } else {
+                      echo "<tr><td colspan='6'> No Students found. </td></tr>";
+                    }
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -287,7 +286,7 @@ if (isset($_SESSION['ID'])) {
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Front-Page.php");
+  header("Location: Login-form.php");
   exit();
 }
 ?>

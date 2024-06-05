@@ -38,7 +38,7 @@ if (isset($_SESSION['ID'])) {
           <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
-          
+
         </ul>
 
         <!-- Right navbar links -->
@@ -129,11 +129,17 @@ if (isset($_SESSION['ID'])) {
         <section class="content">
 
           <!-- Default box -->
-          <div class="card">
-            <div class="card-body">
-              <form action="Announcement-be.php" method="POST">
+          
+          <!-- /.card -->
+          
+
+        </section>
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="col-md-6">
+            <form action="Announcement-be.php" method="POST">
                 <div class="mb-3">
-                  <label  class="form-label">Email address</label>
+                  <label class="form-label">Email address</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
@@ -147,13 +153,10 @@ if (isset($_SESSION['ID'])) {
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
               </form>
-
-
             </div>
-          </div>
-          <!-- /.card -->
 
-        </section>
+          </div>
+        </div>
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
@@ -162,7 +165,7 @@ if (isset($_SESSION['ID'])) {
         <div class="float-right d-none d-sm-block">
           <b>Version</b> 3.2.0
         </div>
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io </a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
