@@ -5,14 +5,15 @@ include "db_conn.php";
 
 
 // Check if form data is submitted
-if (isset($_POST['Pnum']) && isset($_POST['month']) && 
-    isset($_POST['day']) && isset($_POST['year']) && 
-    isset($_POST['gender'])  &&  isset($_POST['province']) && 
-    isset($_POST['city']) && isset($_POST['barangay']) && isset($_POST['zip_code']) && 
-    isset($_POST['education']) && isset($_POST['experience']) && isset($_POST['skills'])){
+if (
+    isset($_POST['Pnum']) && isset($_POST['birthday']) && isset($_POST['gender']) &&
+    isset($_POST['province']) && isset($_POST['city']) && isset($_POST['barangay']) &&
+    isset($_POST['zip_code'])
+) {
 
     // Function to validate input data
-    function validate($data){
+    function validate($data)
+    {
         $data = trim($data);
         $data = stripcslashes($data);
         $data = htmlspecialchars($data);
@@ -21,114 +22,114 @@ if (isset($_POST['Pnum']) && isset($_POST['month']) &&
 
     // Retrieve and validate form data
     $Pnum = validate($_POST['Pnum']);
-    $month = validate($_POST['month']);
-    $day = validate($_POST['day']);
-    $year = validate($_POST['year']);
+    $birthday = validate($_POST['birthday']);
     $gender = validate($_POST['gender']);
     $province = validate($_POST['province']);
     $city = validate($_POST['city']);
     $barangay = validate($_POST['barangay']);
     $zip_code = validate($_POST['zip_code']);
-    $education = validate($_POST['education']);
-    $experience = validate($_POST['experience']);
-    $skills = validate($_POST['skills']);
-    $terms = ($_POST['terms']);
-    
 
-    $user_ifo = "Pnum=" . $Pnum . "&month=" . $month . "&day=" . $day . "&year=" . $year . "&gender=" . $gender. 
-                "&province=" . $province. "&city=" . $city. "&barangay=" . $barangay. "&zip_code=" . $zip_code . 
-                "&education=" . $education . "&experience=" . $experience .  "&skills=" . $skills;
+
+
+    $user_ifo = "Pnum=" . $Pnum . "&month=" . $month . "&day=" . $day . "&year=" . $year . "&gender=" . $gender .
+        "&province=" . $province . "&city=" . $city . "&barangay=" . $barangay . "&zip_code=" . $zip_code;
 
     if (empty($Pnum)) {
         header("Location: profile.php?error1=Phone number is required&$user_info");
         exit();
-    }else if (empty($month)){
-        header("Location:  profile.php?error1=month is required&$user_info");
+    } else if (!preg_match('/^\+?[0-9\s-]{10,15}$/', $Pnum)) {
+        header("Location: profile.php?error=Invalid phone number format&$user_info");
         exit();
-    }else if (empty($day)){
-        header("Location:  profile.php?error1=day is required&$user_info");
+    } else if (empty($birthday)) {
+        header("Location: profile.php?error=Birthday is required&$user_info");
         exit();
-    }else if (empty($year)) {  
-        header("Location:  profile.php?error1=year is required&$user_info");
+    } else if (strtotime($birthday) > time()) {
+        header("Location: profile.php?error=Future birthday is not allowed&$user_info");
         exit();
-    }else if (empty($gender)){
+    } else if (empty($gender)) {
         header("Location:  profile.php?error1=Gender is required&$user_info");
         exit();
-    }else if (empty($province)){
+    } else if (empty($province)) {
         header("Location:  profile.php?error1=province is required&$user_info");
         exit();
-    }else if (empty($city)){
+    } else if (empty($city)) {
         header("Location:  profile.php?error1=city is required&$user_info");
         exit();
-    }else if (empty($barangay)) {  
+    } else if (empty($barangay)) {
         header("Location:  profile.php?error1=barangay is required&$user_info");
         exit();
-    }else if (empty($zip_code)) {  
+    } else if (empty($zip_code)) {
         header("Location:  profile.php?error1=zip_code is required&$user_info");
         exit();
-    }else if (empty($education)) {  
-        header("Location:  profile.php?error1=education is required&$user_info");
-        exit();
-    }else if (empty($experience)) {  
-        header("Location:  profile.php?error1=experience is required&$user_info");
-        exit();
-    }else if (empty($skills)) {  
-        header("Location:  profile.php?error1=skills is required&$user_info");
-        exit();
-    }else if (empty($terms)) {  
-        header("Location:  profile.php?error1=Please check the terms and conditions&$user_info");
-        exit();
-    }
+    } else {
+
 
         $ID = $_SESSION['ID'];
 
         // Fetch user information
-        $sql = "SELECT * FROM user WHERE ID='$ID'";
-        $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM students WHERE ID=?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $ID);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
         // Fetch user profile information
-        $sql3 = "SELECT * FROM user_profile WHERE user_id='$user_id'";
-        $result3 = mysqli_query($conn, $sql3);
+        $sql3 = "SELECT * FROM student_profile WHERE ID=?";
+        $stmt3 = mysqli_prepare($conn, $sql3);
+        mysqli_stmt_bind_param($stmt3, "s", $ID);
+        mysqli_stmt_execute($stmt3);
+        $result3 = mysqli_stmt_get_result($stmt3);
 
         // Check if user profile exists, if not, insert a new record
-        if(mysqli_num_rows($result3) == 0) {
-            $sql4 = "INSERT INTO user_profile (user_id) VALUES ('$user_id')";
-            mysqli_query($conn, $sql4);
+        if (mysqli_num_rows($result3) == 0) {
+            $sql4 = "INSERT INTO student_profile (ID) VALUES (?)";
+            $stmt4 = mysqli_prepare($conn, $sql4);
+            mysqli_stmt_bind_param($stmt4, "s", $ID);
+            mysqli_stmt_execute($stmt4);
+            if (mysqli_stmt_affected_rows($stmt4) < 1) {
+                // Handle insertion failure
+                // Log error or provide error message
+            }
         }
 
-        if(mysqli_num_rows($result) > 0) {
-    // Fetch user information if the user exists
+
+        if (mysqli_num_rows($result) > 0) {
+            // Fetch user information if the user exists
             $row = mysqli_fetch_assoc($result);
 
             // Update user profile information
-            $sql2 = "UPDATE `user_profile` SET 
-            `user_id`='$user_id',
-            `Phone_number`='$Pnum',
-            `Month`='$month',
-            `Day`='$day',
-            `Year`='$year',
-            `gender`='$gender',
-            `province`='$province',
-            `city`='$city',
-            `barangay`='$barangay',
-            `zip_code`='$zip_code',
-            `Education`='$education',
-            `Experience`='$experience',
-            `Skills`='$skills' 
-            WHERE user_id='$user_id'";
+            $sql2 = "UPDATE `student_profile` SET
+                `Phone_number` = ?,
+                `birthday` = ?,
+                `gender` = ?,
+                `province` = ?,
+                `city` = ?,
+                `barangay` = ?,
+                `zip_code` = ? 
+                WHERE ID = ?";
 
-            $result2 = mysqli_query($conn, $sql2);
-            
-    if($result2) {
-        echo "<script> alert('Information update successful'); window.location.href='profile.php' </script>";
-        exit();
-    } else {
-        echo "<script> alert('Information failed to update'); window.location.href='profile.php' </script>";
-        exit();
+            $stmt2 = mysqli_prepare($conn, $sql2);
+            mysqli_stmt_bind_param($stmt2, "ssssssss", $Pnum, $birthday, $gender, $province, $city, $barangay, $zip_code, $ID);
+            $result2 = mysqli_stmt_execute($stmt2);
+
+
+            if ($result2) {
+                $_SESSION['Pnum'] = $Pnum;
+                $_SESSION['birthday'] = $birthday;
+                $_SESSION['gender'] = $gender;
+                $_SESSION['province'] = $province;
+                $_SESSION['city'] = $city;
+                $_SESSION['barangay'] = $barangay;
+                $_SESSION['zip_code'] = $zip_code;
+                header("Location: profile.php?success1=Information updated successfully&$user_info");
+                exit();
+            } else {
+                header("Location: profile.php?error1=Information failed to update&$user_info");
+                exit();
+            }
+        }
     }
-}
-}
-else {
+} else {
     // Redirect to the registration page if no form data is submitted
     header("Location:  profile.php");
     exit();

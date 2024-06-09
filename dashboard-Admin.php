@@ -141,61 +141,87 @@ if (isset($_SESSION['ID'])) {
 
 
             </div><!-- /.row -->
-            <div class="container">
-              <div class="section-2">
-                <div class="counter">
-                  <h2>Number of Students Logged In</h2>
-                  <?php
-                  include "db_conn.php";
-                  $count_sql = "SELECT COUNT(*) AS student_count FROM students WHERE Role = 'student' AND Status = 'Online'";
-                  $count_result = $conn->query($count_sql);
-                  $student_count = 0;
+            <div class="container mt-5">
+              <div class="row">
 
-                  if ($count_result->num_rows > 0) {
-                    $count_row = $count_result->fetch_assoc();
-                    $student_count = $count_row["student_count"];
-                  }
-                  ?>
-                  <p><?php echo $student_count; ?></p>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center"> <!-- Center the column -->
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h2 class="card-title">Number of Students Logged In</h2>
+                          <p class="card-text">
+                            <?php
+                            include "db_conn.php";
+                            $count_sql = "SELECT COUNT(*) AS student_count FROM students WHERE Role = 'student'";
+                            $count_result = $conn->query($count_sql);
+                            $student_count = 0;
+
+                            if ($count_result->num_rows > 0) {
+                              $count_row = $count_result->fetch_assoc();
+                              $student_count = $count_row["student_count"];
+                            }
+                            echo $student_count;
+                            ?>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- Logged In Students Details -->
+                <div class="col-md-9 mx-auto">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th style="width: 15%; text-align: Center;">Student ID</th>
+                              <th style="width: 20%; text-align: Center;">Fullname</th>
+                              <th style="width: 15%; text-align: Center;">Course</th>
+                              <th style="width: 10%; text-align: Center;">Year</th>
+                              <th style="width: 15%; text-align: Center;">Login Time</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            include "db_conn.php";
+                            $sql = "SELECT Student_ID, First_name, Middle_name ,Last_name, Email, Login_Time, Course, Year_level FROM students WHERE Role = 'student'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                              while ($row = $result->fetch_assoc()) {
+                                $LoginTime = date('Y-m-d H:i:s', strtotime($row['Login_Time']));
+                                ?>
+                                <tr>
+                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Student_ID']); ?></td>
+                                  <td style="text-align: Center;">
+                                    <?php echo htmlspecialchars($row['Last_name']) . ', ' . $row['First_name'] . ' ' . $row['Middle_name'] . '.'; ?>
+                                  </td>
+                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Course']); ?></td>
+                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Year_level']); ?></td>
+                                  <td style="text-align: Center;"><?php echo htmlspecialchars($LoginTime); ?></td>
+                                </tr>
+                                <?php
+                              }
+                            } else {
+                              echo "<tr><td colspan='6'> No Students found. </td></tr>";
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="section-3">
-                <!-- <h2>Logged In Students Details</h2> -->
-                <table>
-                  <thead>
-
-                    <tr>
-                      <th>Student ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Login Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    include "db_conn.php";
-                    $sql = "SELECT Student_ID, Last_name, Email, Login_Time FROM students WHERE Role = 'student' AND Status = 'Online'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                      while ($row = $result->fetch_assoc()) {
-                        $LoginTime = date('Y-m-d H:i:s', strtotime($row['Login_Time']))
-                          ?>
-                        <tr>
-                          <td><?php echo htmlspecialchars($row['Student_ID']); ?></td>
-                          <td><?php echo htmlspecialchars($row['Last_name']); ?></td>
-                          <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                          <td><?php echo htmlspecialchars($LoginTime); ?></td>
-                        </tr>
-                        <?php
-                      }
-                    } else {
-                      echo "<tr><td colspan='6'> No Students found. </td></tr>";
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
             </div>
+
+
+
           </div><!-- /.container-fluid -->
         </div>
         <!-- <div class="section-2">

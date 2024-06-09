@@ -22,6 +22,7 @@ if (isset($_SESSION['ID'])) {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="Trainor-style.css">
   </head>
@@ -91,16 +92,18 @@ if (isset($_SESSION['ID'])) {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-              
+
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
@@ -133,61 +136,64 @@ if (isset($_SESSION['ID'])) {
         <!-- Main content -->
         <section class="content">
 
-          <!-- Default box -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">No buddy? Choose here!</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <div class="container-trainor">
-                <div class="row">
-                  <div class="column">
-                    <img src="BINI GWEN.jpg" alt="Gwen">
-                    <div class="holder">
-                      <h1>Bini Gwen</h1>
-                    </div>
-                  </div>
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-4">
+                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
+                  <img src="" alt="BINI GWEN">
                 </div>
               </div>
-
-
-
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-              .
-            </div>
-            <!-- /.card-footer-->
           </div>
-          <!-- /.card -->
 
-        </section>
-        <!-- /.content -->
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-4">
+                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
+                  <img src="" alt="BINI GWEN">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-4">
+                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
+                  <img src="" alt="BINI GWEN">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
       </div>
-      <!-- /.content-wrapper -->
+      <!-- /.card-body -->
+      <div class="card-footer">
+        .
+      </div>
+      <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
 
-      <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-          <b>Version</b> 3.2.0
-        </div>
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-      </footer>
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-      </aside>
-      <!-- /.control-sidebar -->
+    <footer class="main-footer">
+      <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.2.0
+      </div>
+      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 

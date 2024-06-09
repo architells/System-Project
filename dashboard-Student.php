@@ -21,6 +21,7 @@ if (isset($_SESSION['ID'])) {
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -111,12 +112,14 @@ if (isset($_SESSION['ID'])) {
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
@@ -134,18 +137,49 @@ if (isset($_SESSION['ID'])) {
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <!-- /.col -->`
+              <!-- /.col -->
               <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v3</li>
             </ol> -->
 
-              <div class="card-body" style="text-align: center; margin-top: 20%;">
-                <h1 style="font-size: 70px">WELCOME, <h1 style="font-size: 50px; color: blue;">
-                    <?php echo $_SESSION['fname'] ?>
-                  </h1>
+
+              <div class="container mt-5">
+                <div class="row align-items-center">
+                  <div class="col-md-4 text-center">
+                    <img class="profile-user-img img-fluid img-circle"
+                      style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
+                      src="<?php echo $Profile_pic; ?>" alt="User profile picture">
+                  </div>
+                  <div class="col-md-8 mt-3">
+                    <div class="card">
+                      <div class="card-body d-flex flex-column">
+                        <h6>Student ID : &nbsp;&nbsp;<?php echo $_SESSION['s_ID'] ?></h6>
+                        <h6>Fullname :
+                          &nbsp;&nbsp;<?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                        </h6>
+                        <h6>Course : &nbsp;&nbsp;<?php echo $_SESSION['course'] ?></h6>
+                        <h6>Year : &nbsp;&nbsp;<?php echo $_SESSION['year_level'] ?></h6>
+
+                        <!-- Display QR Code -->
+                        <div class="row justify-content-end mt-auto pb-3">
+                          <div class="col-auto mt-3">
+                            <img src="<?php echo $_SESSION['qrCodeFile']; ?>" alt="QR Code"
+                              style="height: 200px; width: 200px;">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+
+
+
+
+
 
 
 

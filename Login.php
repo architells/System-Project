@@ -40,12 +40,12 @@
 
           <!-- Display error messages -->
           <?php if (isset($_GET['error'])) { ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger text-center">
               <?php echo htmlspecialchars($_GET['error']); ?>
             </div>
           <?php } ?>
           <?php if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success">
+            <div class="alert alert-success text-center">
               <?php echo htmlspecialchars($_GET['success']); ?>
             </div>
           <?php } ?>
@@ -57,30 +57,6 @@
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="bi bi-person-vcard-fill"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <div class="input-group">
-                  <input type="text" name="course" class="form-control" placeholder="Course">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="bi bi-book"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="input-group">
-                  <input type="text" name="year_level" class="form-control" placeholder="Year level">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="bi bi-calendar"></span>
-                    </div>
                   </div>
                 </div>
               </div>

@@ -2,10 +2,17 @@
 session_start();
 include "db_conn.php";
 
+require 'vendor/autoload.php'; 
+
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+
 // Check if the form is submitted with required fields
 if (
     isset($_POST['fname']) && isset($_POST['mname']) && isset($_POST['lname']) &&
-    isset($_POST['s_ID']) && isset($_POST['course']) && isset($_POST['year_level']) && 
+    isset($_POST['s_ID']) && isset($_POST['course']) && isset($_POST['year_level']) &&
     isset($_POST['email']) && isset($_POST['role']) && isset($_POST['password'])
 ) {
 
@@ -42,9 +49,6 @@ if (
     // Check if any required field is empty
     if (empty($fname)) {
         header("Location: Register.php?error=Firstname is empty"); // Redirect with an error message
-        exit();
-    } else if (empty($mname)) {
-        header("Location: Register.php?error=Middle name is empty"); // Redirect with an error message
         exit();
     } else if (empty($lname)) {
         header("Location: Register.php?error=Lastname is empty"); // Redirect with an error message
@@ -90,10 +94,37 @@ if (
 
             // Check if the insertion was successful
             if ($result) {
-                header("Location: Register.php?success=Your account has been created successfully");
-                exit();
+                // Define the data you want to encode in the QR code (e.g., user's details)
+                $data = "$lname, $fname $mname. $course - $year_level $s_ID";
+
+                // Set up the QR code renderer
+                $renderer = new ImageRenderer(
+                    new RendererStyle(400), // Width and height of the QR code
+                    new ImagickImageBackEnd() // Use SvgImageBackEnd as the image backend
+                );
+
+                // Create the QR code writer
+                $writer = new Writer($renderer);
+
+                // Define the file path where the QR code will be saved
+                $qrCodeFile = 'qr_codes/' . $s_ID . '.png'; // File path to save the QR code
+
+                // Write the QR code to a file
+                $writer->writeFile($data, $qrCodeFile);
+
+                // Save the QR code file path in the session
+                $_SESSION['qrCodeFile'] = $qrCodeFile;
+
+                // Check if QR code generation was successful
+                if (file_exists($qrCodeFile)) {
+                    header("Location: Register.php?success=Your account has been created successfully"); // Redirect with success message
+                    exit();
+                } else {
+                    header("Location: Register.php?error=Error generating QR code"); // Redirect with error message
+                    exit();
+                }
             } else {
-                header("Location: Register.php?error=An error occurred while creating your account");
+                header("Location: Register.php?error=An error occurred while creating your account"); // Redirect with error message
                 exit();
             }
         }

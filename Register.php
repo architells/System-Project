@@ -27,10 +27,8 @@
 
 <body class="hold-transition login-page"
   style="background: url('PIC_SET.jpg') no-repeat center center fixed; background-size: cover;">
+
   <div class="container">
-    <div class="d-flex justify-content-start">
-      <h3 style="font-weight: bold;">GYM.</h3>
-    </div>
     <div class="d-flex justify-content-center align-items-center min-vh-100">
       <div class="col-md-8 wider-form">
         <div class="card card-outline card-primary">
@@ -40,12 +38,12 @@
           <div class="card-body">
             <p class="login-box-msg">Fill the form to create your account</p>
             <?php if (isset($_GET['error'])) { ?>
-              <div class="alert alert-danger">
+              <div class="alert alert-danger text-center">
                 <?php echo $_GET['error']; ?>
               </div>
             <?php } ?>
             <?php if (isset($_GET['success'])) { ?>
-              <div class="alert alert-success">
+              <div class="alert alert-success text-center">
                 <?php echo $_GET['success']; ?>
               </div>
             <?php } ?>
@@ -126,7 +124,7 @@
               </div>
               <div class="input-group mb-3">
                 <select id="role" name="role" class="form-control">
-                  <option value="" disabled selected>Select Role</option>
+                  <option value="" selected>Select Role</option>
                   <option value="student">Student</option>
                   <option value="admin">Admin</option>
                 </select>

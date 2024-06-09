@@ -21,6 +21,7 @@ if (isset($_SESSION['ID'])) {
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
   </head>
@@ -98,12 +99,14 @@ if (isset($_SESSION['ID'])) {
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
@@ -121,13 +124,6 @@ if (isset($_SESSION['ID'])) {
         <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-1">
-
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-left">
-                  <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                  <li class="breadcrumb-item active">User Profile</li>
-                </ol>
-              </div>
             </div>
           </div><!-- /.container-fluid -->
         </section>
@@ -151,7 +147,7 @@ if (isset($_SESSION['ID'])) {
                       <?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
                     </h3>
 
-                    <p class="text-muted text-center"><?php echo $_SESSION['Education']; ?></p>
+                    <!-- <p class="text-muted text-center"><?php echo $_SESSION['Education']; ?></p> -->
 
                     <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
@@ -167,7 +163,7 @@ if (isset($_SESSION['ID'])) {
                         <b>Gender</b> <a class="float-right"><?php echo $_SESSION['gender']; ?></a>
                       </li>
                       <li class="list-group-item">
-                        <b>Email</b> <a class="float-right"><?php echo $_SESSION['Email']; ?></a>
+                        <b>Email</b> <a class="float-right"><?php echo $_SESSION['email']; ?></a>
                       </li>
                       <li class="list-group-item">
                         <b>Phone number</b> <a class="float-right"><?php echo $_SESSION['Pnum']; ?></a>
@@ -288,40 +284,6 @@ if (isset($_SESSION['ID'])) {
                             <div class="col-sm-2 mb-2">
                               <input type="text" class="form-control" name="zip_code" id="inputZipCode"
                                 placeholder="Zip Code" value="<?php echo $_GET['zip_code'] ?? ''; ?>">
-                            </div>
-                          </div>
-                          <!-- Education -->
-                          <div class="form-group row">
-                            <label for="inputEducation" class="col-sm-2 col-form-label">Education</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" name="education" id="inputEducation"
-                                placeholder="Education" value="<?php echo $_GET['education'] ?? ''; ?>">
-                            </div>
-                          </div>
-                          <!-- Experience -->
-                          <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                            <div class="col-sm-10">
-                              <textarea class="form-control" name="experience" id="inputExperience"
-                                placeholder="Experience"><?php echo $_GET['experience'] ?? ''; ?></textarea>
-                            </div>
-                          </div>
-                          <!-- Skills -->
-                          <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" name="skills" id="inputSkills" placeholder="Skills"
-                                value="<?php echo $_GET['skills'] ?? ''; ?>">
-                            </div>
-                          </div>
-                          <!-- Terms and Conditions Checkbox -->
-                          <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
-                              <div class="checkbox">
-                                <label>
-                                  <input type="checkbox" name='terms'> I agree to the <a href="#">terms and conditions</a>
-                                </label>
-                              </div>
                             </div>
                           </div>
                           <!-- Update Button -->

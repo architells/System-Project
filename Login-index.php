@@ -23,7 +23,7 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
     if (empty($s_ID)) {
         header("Location: Login.php?error=Please enter your Student ID");
         exit();
-    } 
+    }
     // Check if the role is empty
     else if (empty($role)) {
         header("Location: Login.php?error=Please select your role");
@@ -35,8 +35,11 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
         exit();
     } else {
         // SQL query to fetch user details by Student ID
-        $sql = "SELECT * FROM students WHERE Student_ID = '$s_ID' AND Role = '$role'";
-        $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM students WHERE Student_ID = ? AND Role = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $s_ID, $role);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
         // Check if the student ID exists in the database
         if (mysqli_num_rows($result) === 1) {
@@ -46,8 +49,10 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
             if (password_verify($pass, $row['Password'])) {
 
                 // Update the login time
-                $updateSql = "UPDATE students SET Login_Time = CURRENT_TIMESTAMP, Status = 'Online' WHERE Student_ID = '$s_ID'";
-                mysqli_query($conn, $updateSql);
+                $updateSql = "UPDATE students SET Login_Time = CURRENT_TIMESTAMP, Status = 'Online' WHERE Student_ID = ?";
+                $updateStmt = mysqli_prepare($conn, $updateSql);
+                mysqli_stmt_bind_param($updateStmt, "s", $s_ID);
+                mysqli_stmt_execute($updateStmt);
 
                 // Set session variables on successful login
                 $_SESSION['ID'] = $row['ID'];
@@ -56,8 +61,22 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
                 $_SESSION['lname'] = $row['Last_name'];
                 $_SESSION['s_ID'] = $row['Student_ID'];
                 $_SESSION['email'] = $row['Email'];
-                $_SESSION['role'] = $row['Role'];
+                $_SESSION['course'] = $row['Course'];
+                $_SESSION['year_level'] = $row['Year_level'];
 
+
+                $_SESSION['role'] = $row['Role'];
+                $_SESSION['Pnum'] = $row['Phone_Number'];
+                $_SESSION['birthday'] = $row['Birthday'];
+                $_SESSION['gender'] = $row['Gender'];
+                $_SESSION['province'] = $row['Province'];
+                $_SESSION['city'] = $row['City'];
+                $_SESSION['barangay'] = $row['Barangay'];
+                $_SESSION['zip_code'] = $row['Zip_code'];
+                $_SESSION['Profile_picture'] = $row['Profile_picture'];
+
+
+                // Redirect based on role
                 if ($role == 'admin') {
                     header("Location: dashboard-Admin.php");
                 } else {
