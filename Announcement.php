@@ -129,15 +129,15 @@ if (isset($_SESSION['ID'])) {
         <section class="content">
 
           <!-- Default box -->
-          
+
           <!-- /.card -->
-          
+
 
         </section>
-        <div class="card card-primary card-outline">
+        <div class="card card-primary card-outline w-50 mx-auto">
           <div class="card-body box-profile">
             <div class="col-md-6">
-            <form action="Announcement-be.php" method="POST">
+              <form action="Announcement-be.php" method="POST">
                 <div class="mb-3">
                   <label class="form-label">Email address</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -154,7 +154,6 @@ if (isset($_SESSION['ID'])) {
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
-
           </div>
         </div>
         <!-- /.content -->

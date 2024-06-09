@@ -40,43 +40,43 @@ if (isset($_POST['Pnum']) && isset($_POST['month']) &&
                 "&education=" . $education . "&experience=" . $experience .  "&skills=" . $skills;
 
     if (empty($Pnum)) {
-        header("Location: profile.php?error=Phone number is required&$user_info");
+        header("Location: profile.php?error1=Phone number is required&$user_info");
         exit();
     }else if (empty($month)){
-        header("Location:  profile.php?error=month is required&$user_info");
+        header("Location:  profile.php?error1=month is required&$user_info");
         exit();
     }else if (empty($day)){
-        header("Location:  profile.php?error=day is required&$user_info");
+        header("Location:  profile.php?error1=day is required&$user_info");
         exit();
     }else if (empty($year)) {  
-        header("Location:  profile.php?error=year is required&$user_info");
+        header("Location:  profile.php?error1=year is required&$user_info");
         exit();
     }else if (empty($gender)){
-        header("Location:  profile.php?error=Gender is required&$user_info");
+        header("Location:  profile.php?error1=Gender is required&$user_info");
         exit();
     }else if (empty($province)){
-        header("Location:  profile.php?error=province is required&$user_info");
+        header("Location:  profile.php?error1=province is required&$user_info");
         exit();
     }else if (empty($city)){
-        header("Location:  profile.php?error=city is required&$user_info");
+        header("Location:  profile.php?error1=city is required&$user_info");
         exit();
     }else if (empty($barangay)) {  
-        header("Location:  profile.php?error=barangay is required&$user_info");
+        header("Location:  profile.php?error1=barangay is required&$user_info");
         exit();
     }else if (empty($zip_code)) {  
-        header("Location:  profile.php?error=zip_code is required&$user_info");
+        header("Location:  profile.php?error1=zip_code is required&$user_info");
         exit();
     }else if (empty($education)) {  
-        header("Location:  profile.php?error=education is required&$user_info");
+        header("Location:  profile.php?error1=education is required&$user_info");
         exit();
     }else if (empty($experience)) {  
-        header("Location:  profile.php?error=experience is required&$user_info");
+        header("Location:  profile.php?error1=experience is required&$user_info");
         exit();
     }else if (empty($skills)) {  
-        header("Location:  profile.php?error=skills is required&$user_info");
+        header("Location:  profile.php?error1=skills is required&$user_info");
         exit();
     }else if (empty($terms)) {  
-        header("Location:  profile.php?error=Please check the terms and conditions&$user_info");
+        header("Location:  profile.php?error1=Please check the terms and conditions&$user_info");
         exit();
     }
 

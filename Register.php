@@ -1,86 +1,200 @@
-<?php
-session_start();
-include "db_conn.php";
+<!DOCTYPE html>
+<html lang="en">
 
-// Check if the form is submitted with required fields
-if(isset($_POST['fname']) && isset($_POST['mname']) && isset($_POST['lname']) && 
-   isset($_POST['s_ID']) && isset($_POST['email']) && isset($_POST['role']) && 
-   isset($_POST['password'])){
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="dumbbell.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Register</title>
 
-    /**
-     * Function to validate input data.
-     * 
-     * Description: Cleans input data to prevent security issues.
-     * Parameters: 
-     *   - $data (string): The input data to be validated.
-     * Behavior: Trims whitespace, strips slashes, and converts special characters to HTML entities.
-     * Return Values: Returns the cleaned data.
-     */
-    function validate($data){
-        $data = trim($data);            // Remove whitespace from both sides of a string
-        $data = stripslashes($data);    // Un-quotes a quoted string
-        $data = htmlspecialchars($data); // Convert special characters to HTML entities
-        return $data;                   // Return the cleaned data
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <style>
+    .wider-form {
+      max-width: 800px;
     }
+  </style>
+</head>
 
-    // Validate and sanitize input
-    $fname = validate($_POST['fname']);
-    $mname = validate($_POST['mname']);
-    $lname = validate($_POST['lname']);
-    $email = validate($_POST['email']);
-    $s_ID = validate($_POST['s_ID']);
-    $role = validate($_POST['role']);
-    $pass = validate($_POST['password']);
+<body class="hold-transition login-page"
+  style="background: url('PIC_SET.jpg') no-repeat center center fixed; background-size: cover;">
+  <div class="container">
+    <div class="d-flex justify-content-start">
+      <h3 style="font-weight: bold;">GYM.</h3>
+    </div>
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+      <div class="col-md-8 wider-form">
+        <div class="card card-outline card-primary">
+          <div class="card-header text-center">
+            <h1 style="font-size: 50px;">Register</h1>
+          </div>
+          <div class="card-body">
+            <p class="login-box-msg">Fill the form to create your account</p>
+            <?php if (isset($_GET['error'])) { ?>
+              <div class="alert alert-danger">
+                <?php echo $_GET['error']; ?>
+              </div>
+            <?php } ?>
+            <?php if (isset($_GET['success'])) { ?>
+              <div class="alert alert-success">
+                <?php echo $_GET['success']; ?>
+              </div>
+            <?php } ?>
 
-    // Check if any required field is empty
-    if(empty($fname)){
-        header("Location: Register-form.php?error=Firstname is empty"); // Redirect with an error message
-        exit();
-    } else if(empty($mname)){
-        header("Location: Register-form.php?error=Middle name is empty"); // Redirect with an error message
-        exit();
-    } else if(empty($lname)){
-        header("Location: Register-form.php?error=Lastname is empty"); // Redirect with an error message
-        exit();
-    }else if(empty($email)){
-        header("Location: Register-form.php?error=Email is empty"); // Redirect with an error message
-        exit();
-    } else if(empty($s_ID)){
-        header("Location: Register-form.php?error=Student ID is empty"); // Redirect with an error message
-        exit();
-    } else if(empty($role)){
-        header("Location: Register-form.php?error=Role is empty"); // Redirect with an error message
-        exit();
-    }else if(empty($pass)){
-        header("Location: Register-form.php?error=Password is empty"); // Redirect with an error message
-        exit();
-    } else {
-        // Hash the password using bcrypt
-        $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
-        $sqlCheckID = "SELECT * FROM students WHERE Student_ID='$s_ID' OR Email='$email'";
-        $check = mysqli_query($conn, $sqlCheckID);
-        if(mysqli_num_rows($check) > 0){
-            header("Location: register-form.php?error=Student ID or Email is already taken");
-            exit();
-        }else{
+            <form action="Register-index.php" method="post">
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input type="text" name="fname" class="form-control" placeholder="First name"
+                      value="<?php echo $_GET['fname'] ?? ''; ?>" pattern="[A-Za-z ]+" title="numbers are not allowed!">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input type="text" name="mname" class="form-control" placeholder="Middle name"
+                      value="<?php echo $_GET['mname'] ?? ''; ?>" pattern="[A-Za-z .]+"
+                      title="numbers are not allowed!">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input type="text" name="lname" class="form-control" placeholder="Last name"
+                      value="<?php echo $_GET['lname'] ?? ''; ?>" pattern="[A-Za-z]+" title="numbers are not allowed!">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-        // Insert user data into the database
-        $sql = "INSERT INTO students (First_name, Middle_name, Last_name, Student_ID, Email, Role, Password) 
-                VALUES ('$fname', '$mname', '$lname', '$s_ID', '$email', '$role', '$hashed_pass')";
-        $result = mysqli_query($conn, $sql);
+              <div class="input-group mb-3">
+                <input type="text" name="s_ID" class="form-control" placeholder="ID number"
+                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="bi bi-person-vcard-fill"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" name="course" class="form-control" placeholder="Course"
+                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="bi bi-book"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" name="year_level" class="form-control" placeholder="Year level"
+                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="bi bi-calendar"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email"
+                  value="<?php echo $_GET['email'] ?? ''; ?>">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <select id="role" name="role" class="form-control">
+                  <option value="" disabled selected>Select Role</option>
+                  <option value="student">Student</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="bi bi-people"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" name="retypepassword" class="form-control" placeholder="Retype password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <div class="icheck-primary">
+                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                    <label for="agreeTerms">
+                      I agree to the <a href="#">terms</a>
+                    </label>
+                  </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-4">
+                  <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+            <div class="social-auth-links text-center">
+              <a href="#" class="btn btn-block btn-primary">
+                <i class="fab fa-facebook mr-2"></i>
+                Sign up using Facebook
+              </a>
+              <a href="#" class="btn btn-block btn-danger">
+                <i class="fab fa-google-plus mr-2"></i>
+                Sign up using Google+
+              </a>
+            </div>
 
-        // Check if the insertion was successful
-        if($result){
-            header("Location: register-form.php?success=Your account has been created successfully");
-            exit();
-        } else {
-            header("Location: register-form.php?error=An error occurred while creating your account");
-            exit();
-        }
-    }
-}
-}else{
-    header("Location: register-form.php");
-    exit();
-}
-?>
+            <a href="Login.php" class="text-center">I already have a membership</a>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+  <!-- /.login-box -->
+
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 session_start();
 
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['Email'])) {
+if (isset($_SESSION['ID'])) {
 
 
 
@@ -22,17 +22,17 @@ if (isset($_POST['oldPass']) && isset($_POST['newPass'])){
 
 
     if (empty($oldPass)) {
-        header("Location: profile.php?error=old password is required");
+        header("Location: profile.php?error2=Old password is required");
         exit();
     } else if (empty($newPass)) {
-        header("Location: profile.php?error=New password is required");
+        header("Location: profile.php?error2=New password is required");
         exit();
     } else {
         // Check old password
         $user_id = $_SESSION['user_id'];
 
         if ($oldPass == $newPass) {
-            header("Location: profile.php?error=Old and new passwords cannot be the same");
+            header("Location: profile.php?error2=Old and new passwords cannot be the same");
             exit();
         }
         // Retrieve the hashed password from the database
@@ -61,7 +61,7 @@ if (isset($_POST['oldPass']) && isset($_POST['newPass'])){
                 exit();
             }
         } else {
-            header("Location: profile.php?error=User not found");
+            header("Location: profile.php?error2=User not found");
             exit();
         }
     }

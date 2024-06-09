@@ -91,21 +91,17 @@ if (isset($_SESSION['ID'])) {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-              <li class="nav-item">
-                <a href="profile.php" class="nav-link">
-                  <p>Profile</p>
-                </a>
-              </li>
+              
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <p>Updates</p>
+                  <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
-                  <p>Trainor</p>
+                  <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
             </ul>

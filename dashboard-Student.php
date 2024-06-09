@@ -108,21 +108,16 @@ if (isset($_SESSION['ID'])) {
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-              <li class="nav-item">
-                <a href="profile.php" class="nav-link">
-                  <p>Profile</p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <p>Updates</p>
+                  <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
-                  <p>Trainor</p>
+                  <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
 
@@ -216,7 +211,7 @@ if (isset($_SESSION['ID'])) {
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Login-form.php");
+  header("Location: Login.php");
   exit();
 }
 ?>

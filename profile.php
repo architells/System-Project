@@ -83,7 +83,8 @@ if (isset($_SESSION['ID'])) {
 
 
             <div class="info">
-              <a href="#" class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+              <a href="#"
+                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
@@ -94,21 +95,16 @@ if (isset($_SESSION['ID'])) {
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-              <li class="nav-item">
-                <a href="profile.php" class="nav-link">
-                  <p>Profile</p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <p>Updates</p>
+                  <p>&nbsp;&nbsp;Updates</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
-                  <p>Trainor</p>
+                  <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
 
@@ -152,7 +148,8 @@ if (isset($_SESSION['ID'])) {
                     </div>
 
                     <h3 class="profile-username text-center">
-                      <?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></h3>
+                      <?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                    </h3>
 
                     <p class="text-muted text-center"><?php echo $_SESSION['Education']; ?></p>
 
@@ -225,25 +222,24 @@ if (isset($_SESSION['ID'])) {
               <!-- /.col -->
               <div class="col-md-9">
                 <div class="card">
-                  <div class="card-header p-2">
-                    <ul class="nav nav-pills">
-                      <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Information</a></li>
-                    </ul>
-                  </div><!-- /.card-header -->
-                  <div class="card-body">
-                    <div class="tab-pane" id="settings">
-                      <!-- Personal Information Section -->
+
+
+                  <!-- /.tab-content -->
+                </div>
+                <div class="card card-primary card-outline mx-auto">
+                  <div class="card-body box-profile">
+                    <div class="col-md-12 mx-auto">
                       <div class="personal-information-section">
                         <form action="profile_index.php" method="post" class="form-horizontal">
                           <h2 class="text-center">PERSONAL INFORMATION</h2>
-                          <?php if (isset($_GET['error'])) { ?>
+                          <?php if (isset($_GET['error1'])) { ?>
                             <div class="alert alert-danger">
-                              <?php echo $_GET['error']; ?>
+                              <?php echo $_GET['error1']; ?>
                             </div>
                           <?php } ?>
-                          <?php if (isset($_GET['success'])) { ?>
+                          <?php if (isset($_GET['success1'])) { ?>
                             <div class="alert alert-success">
-                              <?php echo $_GET['success']; ?>
+                              <?php echo $_GET['success1']; ?>
                             </div>
                           <?php } ?>
                           <!-- Phone Number -->
@@ -257,26 +253,18 @@ if (isset($_SESSION['ID'])) {
                           <!-- Birthday -->
                           <div class="form-group row">
                             <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday</label>
-                            <div class="col-sm-3 mb-2">
-                              <input type="text" class="form-control" name="month" id="inputBirthday" placeholder="Month"
-                                value="<?php echo $_GET['month'] ?? ''; ?>">
-                            </div>
-                            <div class="col-sm-3 mb-2">
-                              <input type="text" class="form-control" name="day" id="inputBirthday" placeholder="Day"
-                                value="<?php echo $_GET['day'] ?? ''; ?>">
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                              <input type="text" class="form-control" name="year" id="inputBirthday" placeholder="Year"
-                                value="<?php echo $_GET['year'] ?? ''; ?>">
+                            <div class="col-sm-10">
+                              <input type="date" class="form-control" name="birthday" id="inputBirthday"
+                                placeholder="Birthday" value="<?php echo $_GET['birthday'] ?? ''; ?>">
                             </div>
                           </div>
                           <!-- Gender -->
                           <div class="form-group row">
                             <label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" style="display: flex; gap: 10px;">
                               <select class="form-select" id="inputGender" name="gender"
                                 aria-label="Default select example" value="<?php echo $_GET['gender'] ?? ''; ?>">
-                                <option selected>Select your gender</option>
+                                <option value="" selected>Select your gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                               </select>
@@ -344,65 +332,93 @@ if (isset($_SESSION['ID'])) {
                           </div>
                         </form>
                       </div>
-                      <hr> <!-- Horizontal line -->
-                      <div style="margin-top: 20px;"> <!-- Add a margin-top to move the form down -->
-                        <!-- Change Password Section -->
-                        <div class="change-password-section">
-                          <form action="Change_pass.php" method="post" class="form-horizontal">
-                            <h2 class="text-center">CHANGE PASSWORD</h2>
+                    </div>
+                  </div>
+                </div>
 
 
-                            <!-- Old Password -->
-                            <div class="form-group row">
-                              <label for="inputChangePassword" class="col-sm-2 col-form-label">Change Password</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="oldPass" id="inputChangePassword"
-                                  placeholder="Old password">
-                              </div>
+                <!-- Change Password Section -->
+                <div class="card card-primary card-outline mx-auto">
+                  <div class="card-body box-profile">
+                    <div class="col-md-12 mx-auto">
+                      <div class="change-password-section">
+                        <form action="Change_pass.php" method="post" class="form-horizontal">
+                          <h2 class="text-center">CHANGE PASSWORD</h2>
+                          <?php if (isset($_GET['error2'])) { ?>
+                            <div class="alert alert-danger">
+                              <?php echo $_GET['error2']; ?>
                             </div>
-                            <!-- New Password -->
-                            <div class="form-group row">
-                              <label for="inputNewPassword" class="col-sm-2 col-form-label">New Password</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="newPass" id="inputNewPassword"
-                                  placeholder="New password">
-                              </div>
+                          <?php } ?>
+                          <?php if (isset($_GET['success2'])) { ?>
+                            <div class="alert alert-success">
+                              <?php echo $_GET['success2']; ?>
                             </div>
-                            <!-- Update Password Button -->
-                            <div class="form-group row">
-                              <div class="offset-sm-2 col-sm-10 text-right">
-                                <button type="submit" class="btn btn-primary">Update password</button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <hr>
-                        <!-- Change Profile Section -->
-                        <div class="change-profile-section">
-                          <form action="Change_profile.php" method="post" enctype="multipart/form-data"
-                            class="form-horizontal">
-                            <h2 class="text-center">CHANGE PROFILE</h2>
+                          <?php } ?>
 
-                            <!-- Upload Picture -->
-                            <div class="form-group row">
-                              <label for="inputChangePicture" class="col-sm-2 col-form-label">Upload picture</label>
-                              <div class="col-sm-10">
-                                <input type="file" name="file">
-                              </div>
+                          <!-- Old Password -->
+                          <div class="form-group row">
+                            <label for="inputChangePassword" class="col-sm-2 col-form-label">Change Password</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="oldPass" id="inputChangePassword"
+                                placeholder="Old password">
                             </div>
-                            <!-- Update Profile Button -->
-                            <div class="form-group row">
-                              <div class="offset-sm-2 col-sm-10 text-right">
-                                <button type="submit" class="btn btn-primary" name="upload">Update profile</button>
-                              </div>
+                          </div>
+                          <!-- New Password -->
+                          <div class="form-group row">
+                            <label for="inputNewPassword" class="col-sm-2 col-form-label">New Password</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="newPass" id="inputNewPassword"
+                                placeholder="New password">
                             </div>
-                          </form>
-                        </div>
+                          </div>
+                          <!-- Update Password Button -->
+                          <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10 text-right">
+                              <button type="submit" class="btn btn-primary">Update password</button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
-                    <!-- /.tab-pane -->
                   </div>
-                  <!-- /.tab-content -->
+                </div>
+
+
+                <!-- Change Profile Section -->
+                <div class="card card-primary card-outline mx-auto">
+                  <div class="card-body box-profile">
+                    <div class="col-md-12 mx-auto">
+                      <div class="change-profile-section">
+                        <form action="Change_profile.php" method="post" enctype="multipart/form-data"
+                          class="form-horizontal">
+                          <h2 class="text-center">CHANGE PROFILE</h2>
+                          <?php if (isset($_GET['error3'])) { ?>
+                            <div class="alert alert-danger">
+                              <?php echo $_GET['error3']; ?>
+                            </div>
+                          <?php } ?>
+                          <?php if (isset($_GET['success3'])) { ?>
+                            <div class="alert alert-success">
+                              <?php echo $_GET['success3']; ?>
+                            </div>
+                          <?php } ?>
+                          <!-- Upload Picture -->
+                          <div class="form-group row">
+                            <label for="inputChangePicture" class="col-sm-2 col-form-label">Upload picture</label>
+                            <div class="col-sm-10">
+                              <input type="file" name="file">
+                            </div>
+                          </div>
+                          <!-- Update Profile Button -->
+                          <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10 text-right">
+                              <button type="submit" class="btn btn-primary" name="upload">Update profile</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div><!-- /.card-body -->
               </div>
               <!-- /.card -->

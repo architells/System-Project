@@ -14,14 +14,14 @@ if (isset($_SESSION['s_ID'])) {
         session_unset();
         session_destroy();
         // Redirect to the login page
-        header("Location: Login-form.php");
+        header("Location: Login.php");
         exit();
     } else {
         echo "Error updating record: " . $conn->error;
     }
 } else {
     // If session is not set, redirect to the login page
-    header("Location: Login-form.php");
+    header("Location: Login.php");
     exit();
 }
-?>
+

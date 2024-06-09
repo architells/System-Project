@@ -9,10 +9,10 @@ if(isset($_POST['upload'])){
     $allowed_types = array('image/jpeg', 'image/png', 'image/gif');
 
     if(empty($_FILES["file"]["type"])){
-        header("Location:  profile.php?error=File is required");
+        header("Location:  profile.php?error3=File is required");
         exit();
     }elseif(!in_array($_FILES["file"]["type"], $allowed_types)){
-        header("Location:  profile.php?error=Only image files are allowed");
+        header("Location:  profile.php?error3=Only image files are allowed");
         exit();
     }
 
@@ -57,15 +57,15 @@ if(isset($_POST['upload'])){
             header("Location:  profile.php?success=Picture successfully uploaded");
             exit();
         } else {
-            header("Location:  profile.php?error=Picture not uploaded");
+            header("Location:  profile.php?error3=Picture not uploaded");
             exit();
         }
     } else {
-        header("Location:  profile.php?error=User not found");
+        header("Location:  profile.php?error3=User not found");
         exit();
     }
 } else {
-    header("Location:  profile.php?error=Please try again");
+    header("Location:  profile.php?error3=Please try again");
     exit();
 }
 ?>

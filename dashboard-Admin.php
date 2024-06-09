@@ -286,7 +286,7 @@ if (isset($_SESSION['ID'])) {
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Login-form.php");
+  header("Location: Login.php");
   exit();
 }
 ?>
