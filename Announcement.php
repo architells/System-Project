@@ -75,7 +75,7 @@ if (isset($_SESSION['ID'])) {
                 style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="#"
+              <a href="profile-admin.php"
                 class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
@@ -88,10 +88,11 @@ if (isset($_SESSION['ID'])) {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-person-lines-fill"></i>
-                  <p>&nbsp;&nbsp;Profile</p>
+                <a href="dashboard-Admin.php" class="nav-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <p>&nbsp;&nbsp;Dashboard</p>
                 </a>
               </li>
 
@@ -99,6 +100,13 @@ if (isset($_SESSION['ID'])) {
                 <a href="Announcement.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Logout.php" class="nav-link">
+                  <i class="bi bi-door-open"></i>
+                  <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
             </ul>
@@ -134,28 +142,38 @@ if (isset($_SESSION['ID'])) {
 
 
         </section>
-        <div class="card card-primary card-outline w-50 mx-auto">
+        <div class="card card-primary card-outline w-50 mx-auto mt-5">
           <div class="card-body box-profile">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <form action="Announcement-be.php" method="POST">
+                <!-- Display error messages -->
+                <?php if (isset($_GET['error'])) { ?>
+                  <div class="alert alert-danger text-center">
+                    <?php echo htmlspecialchars($_GET['error']); ?>
+                  </div>
+                <?php } ?>
+                <?php if (isset($_GET['success'])) { ?>
+                  <div class="alert alert-success text-center">
+                    <?php echo htmlspecialchars($_GET['success']); ?>
+                  </div>
+                <?php } ?>
                 <div class="mb-3">
-                  <label class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  <label class="form-label">Event Name</label>
+                  <input type="text" class="form-control" id="eventInput" aria-describedby="emailHelp" name="event_name">
+                  <div id="emailHelp" class="form-text"></div>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" id="exampleInputPassword1" name="description" rows="4"></textarea>
                 </div>
-                <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <div class="mb-3 d-grid">
+                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
           </div>
         </div>
+
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->

@@ -54,35 +54,50 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
                 mysqli_stmt_bind_param($updateStmt, "s", $s_ID);
                 mysqli_stmt_execute($updateStmt);
 
-                // Set session variables on successful login
-                $_SESSION['ID'] = $row['ID'];
-                $_SESSION['fname'] = $row['First_name'];
-                $_SESSION['mname'] = $row['Middle_name'];
-                $_SESSION['lname'] = $row['Last_name'];
-                $_SESSION['s_ID'] = $row['Student_ID'];
-                $_SESSION['email'] = $row['Email'];
-                $_SESSION['course'] = $row['Course'];
-                $_SESSION['year_level'] = $row['Year_level'];
-
-
-                $_SESSION['role'] = $row['Role'];
-                $_SESSION['Pnum'] = $row['Phone_Number'];
-                $_SESSION['birthday'] = $row['Birthday'];
-                $_SESSION['gender'] = $row['Gender'];
-                $_SESSION['province'] = $row['Province'];
-                $_SESSION['city'] = $row['City'];
-                $_SESSION['barangay'] = $row['Barangay'];
-                $_SESSION['zip_code'] = $row['Zip_code'];
-                $_SESSION['Profile_picture'] = $row['Profile_picture'];
-
-
-                // Redirect based on role
-                if ($role == 'admin') {
-                    header("Location: dashboard-Admin.php");
+                // Retrieve additional user profile data
+                $sql2 = "SELECT * FROM student_profile WHERE ID=?";
+                $stmt2 = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+                    header("Location: Login.php?error=SQL Error");
+                    exit();
                 } else {
-                    header("Location: dashboard-Student.php");
+                    mysqli_stmt_bind_param($stmt2, "s", $row['ID']);
+                    mysqli_stmt_execute($stmt2);
+                    $result_profile = mysqli_stmt_get_result($stmt2);
+                    $Student_profile = mysqli_fetch_assoc($result_profile);
+
+                    // Set session variables for the user and user profile
+                    $_SESSION['ID'] = $row['ID'];
+                    $_SESSION['fname'] = $row['First_name'];
+                    $_SESSION['mname'] = $row['Middle_name'];
+                    $_SESSION['lname'] = $row['Last_name'];
+                    $_SESSION['s_ID'] = $row['Student_ID'];
+                    $_SESSION['email'] = $row['Email'];
+                    $_SESSION['course'] = $row['Course'];
+                    $_SESSION['year_level'] = $row['Year_level'];
+                    $_SESSION['role'] = $row['Role'];
+                    $_SESSION['qrCodeFile'] = $row['Qr_Code'];
+
+                    if ($Student_profile) {
+                        // If user profile exists, set session variables for user profile
+                        $_SESSION['Pnum'] = $Student_profile['Phone_Number'];
+                        $_SESSION['birthday'] = $Student_profile['Birthday'];
+                        $_SESSION['gender'] = $Student_profile['Gender'];
+                        $_SESSION['province'] = $Student_profile['Province'];
+                        $_SESSION['city'] = $Student_profile['City'];
+                        $_SESSION['barangay'] = $Student_profile['Barangay'];
+                        $_SESSION['zip_code'] = $Student_profile['Zip_code'];
+                        $_SESSION['Profile_picture'] = $Student_profile['Profile_picture'];
+                    }
+
+                    // Redirect based on role
+                    if ($role == 'admin') {
+                        header("Location: dashboard-Admin.php");
+                    } else {
+                        header("Location: dashboard-Student.php");
+                    }
+                    exit();
                 }
-                exit();
             } else {
                 header("Location: Login.php?error=Incorrect Password!");
                 exit();
@@ -96,3 +111,4 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
     header("Location: Login.php");
     exit();
 }
+

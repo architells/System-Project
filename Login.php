@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition login-page"
-  style="background: url('PIC_SET.jpg') no-repeat center center fixed; background-size: cover;">
+  style="background: url('GYM-IMG.jpg') no-repeat center center fixed; background-size: cover;">
 
   <div class="container">
     <div class="d-flex justify-content-start">
@@ -86,7 +86,7 @@
             <div class="row">
               <!-- /.col -->
               <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
               </div>
               <!-- /.col -->
             </div>

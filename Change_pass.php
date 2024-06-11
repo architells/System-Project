@@ -6,68 +6,68 @@ if (isset($_SESSION['ID'])) {
 
 
 
-include "db_conn.php";
+    include "db_conn.php";
 
-if (isset($_POST['oldPass']) && isset($_POST['newPass'])){
-    
-    function validate($data){
-        $data = trim($data);
-        $data = stripcslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+    if (isset($_POST['oldPass']) && isset($_POST['newPass'])) {
 
-    $oldPass = validate($_POST['oldPass']);
-    $newPass = validate($_POST['newPass']);
-
-
-    if (empty($oldPass)) {
-        header("Location: profile.php?error2=Old password is required");
-        exit();
-    } else if (empty($newPass)) {
-        header("Location: profile.php?error2=New password is required");
-        exit();
-    } else {
-        // Check old password
-        $user_id = $_SESSION['user_id'];
-
-        if ($oldPass == $newPass) {
-            header("Location: profile.php?error2=Old and new passwords cannot be the same");
-            exit();
+        function validate($data)
+        {
+            $data = trim($data);
+            $data = stripcslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
         }
-        // Retrieve the hashed password from the database
-        $sql = "SELECT password FROM user WHERE user_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            $hashed_password = $row['password'];
+        $oldPass = validate($_POST['oldPass']);
+        $newPass = validate($_POST['newPass']);
 
-            // Verify the old password
-            if (password_verify($oldPass, $hashed_password)) {
-                // Update the password
-                $hashed_new = password_hash($newPass, PASSWORD_BCRYPT);
-                $update_sql = "UPDATE user SET password = ? WHERE user_id = ?";
-                $stmt = $conn->prepare($update_sql);
-                $stmt->bind_param("si", $hashed_new, $user_id);
-                $stmt->execute();
-                echo "<script> alert('Password updated successful'); window.location.href='profile.php' </script>";
-                exit();
-            } else {
-                echo "<script> alert('Password failed to update'); window.location.href='profile.php' </script>";
+
+        if (empty($oldPass)) {
+            header("Location: profile.php?error2=Old password is required");
+            exit();
+        } else if (empty($newPass)) {
+            header("Location: profile.php?error2=New password is required");
+            exit();
+        } else {
+            // Check old password
+            $ID = $_SESSION['ID'];
+
+            if ($oldPass == $newPass) {
+                header("Location: profile.php?error2=Old and new passwords cannot be the same");
                 exit();
             }
-        } else {
-            header("Location: profile.php?error2=User not found");
-            exit();
+            // Retrieve the hashed password from the database
+            $sql = "SELECT Password FROM students WHERE ID = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $ID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $hashed_password = $row['Password'];
+
+                // Verify the old password
+                if (password_verify($oldPass, $hashed_password)) {
+                    // Update the password
+                    $hashed_new = password_hash($newPass, PASSWORD_BCRYPT);
+                    $update_sql = "UPDATE students SET Password = ? WHERE ID = ?";
+                    $stmt = $conn->prepare($update_sql);
+                    $stmt->bind_param("si", $hashed_new, $ID);
+                    $stmt->execute();
+                    header("Location: profile.php?success2=Password updated successfully");
+                    exit();
+                } else {
+                    header("Location: profile.php?error2=Password failed to update");
+                    exit();
+                }
+            } else {
+                header("Location: profile.php?error2=User not found");
+                exit();
+            }
         }
     }
-}
-}
-else{
+} else {
     header("Location: profile.php?");
     exit();
 }

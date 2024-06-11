@@ -38,13 +38,13 @@ if (
         header("Location: profile.php?error1=Phone number is required&$user_info");
         exit();
     } else if (!preg_match('/^\+?[0-9\s-]{10,15}$/', $Pnum)) {
-        header("Location: profile.php?error=Invalid phone number format&$user_info");
+        header("Location: profile.php?error1=Invalid phone number format&$user_info");
         exit();
     } else if (empty($birthday)) {
-        header("Location: profile.php?error=Birthday is required&$user_info");
+        header("Location: profile.php?error1=Birthday is required&$user_info");
         exit();
     } else if (strtotime($birthday) > time()) {
-        header("Location: profile.php?error=Future birthday is not allowed&$user_info");
+        header("Location: profile.php?error1=Future birthday is not allowed&$user_info");
         exit();
     } else if (empty($gender)) {
         header("Location:  profile.php?error1=Gender is required&$user_info");

@@ -13,7 +13,7 @@ if (isset($_SESSION['ID'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Blank Page</title>
+    <title>GYM | Trainor</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="shortcut icon" href="dumbbell.png">
@@ -24,7 +24,6 @@ if (isset($_SESSION['ID'])) {
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="Trainor-style.css">
   </head>
 
   <body class="hold-transition sidebar-mini">
@@ -93,11 +92,17 @@ if (isset($_SESSION['ID'])) {
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+              <li class="nav-item">
+                <a href="dashboard-Student.php" class="nav-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <p>&nbsp;&nbsp;Dashboard</p>
+                </a>
+              </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="student-updates.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
-                  <p>&nbsp;&nbsp;Updates</p>
+                  <p>&nbsp;&nbsp;Announcements</p>
                 </a>
               </li>
 
@@ -105,6 +110,20 @@ if (isset($_SESSION['ID'])) {
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-envelope-check"></i>
+                  <p>&nbsp;&nbsp;Verify Email</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Logout-students.php" class="nav-link">
+                  <i class="bi bi-door-open"></i>
+                  <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
             </ul>
@@ -124,10 +143,6 @@ if (isset($_SESSION['ID'])) {
                 <h1>Trainor</h1>
               </div>
               <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Blank Page</li>
-                </ol>
               </div>
             </div>
           </div><!-- /.container-fluid -->
@@ -135,39 +150,11 @@ if (isset($_SESSION['ID'])) {
 
         <!-- Main content -->
         <section class="content">
-
-          <div class="container mt-3">
-            <div class="row">
-              <div class="col-4">
-                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
-                  <img src="" alt="BINI GWEN">
-                </div>
-              </div>
-            </div>
+          <div class="col-md-4 text-center">
+            <img class="profile-user-img img-fluid img-circle"
+              style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;" src="BINI GWEN.jpg"
+              alt="BINI GWEN">
           </div>
-
-          <div class="container mt-3">
-            <div class="row">
-              <div class="col-4">
-                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
-                  <img src="" alt="BINI GWEN">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container mt-3">
-            <div class="row">
-              <div class="col-4">
-                <div class="bg-light border rounded" style="width: 200px; height: 250px;">
-                  <img src="" alt="BINI GWEN">
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
       </div>
       <!-- /.card-body -->
       <div class="card-footer">

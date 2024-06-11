@@ -14,7 +14,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User Profile</title>
+    <title>GYM | PROFILE</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -50,9 +50,6 @@ if (isset($_SESSION['ID'])) {
           </li>
         </ul>
 
-        <form action="logout.php" method="post" style="display: inline;">
-          <button class="btn btn-primary" type="submit">Logout</button>
-        </form>
       </nav>
       <!-- /.navbar -->
 
@@ -84,7 +81,7 @@ if (isset($_SESSION['ID'])) {
 
 
             <div class="info">
-              <a href="#"
+              <a href="profile.php"
                 class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
@@ -96,11 +93,17 @@ if (isset($_SESSION['ID'])) {
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+              <li class="nav-item">
+                <a href="dashboard-Student.php" class="nav-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <p>&nbsp;&nbsp;Dashboard</p>
+                </a>
+              </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="Student-updates.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
-                  <p>&nbsp;&nbsp;Updates</p>
+                  <p>&nbsp;&nbsp;Announcements</p>
                 </a>
               </li>
 
@@ -108,6 +111,20 @@ if (isset($_SESSION['ID'])) {
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-envelope-check"></i>
+                  <p>&nbsp;&nbsp;Verify Email</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Logout-students.php" class="nav-link">
+                  <i class="bi bi-door-open"></i>
+                  <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
 
@@ -160,17 +177,10 @@ if (isset($_SESSION['ID'])) {
                         <b>Lastname</b> <a class="float-right"><?php echo $_SESSION['lname']; ?></a>
                       </li>
                       <li class="list-group-item">
-                        <b>Gender</b> <a class="float-right"><?php echo $_SESSION['gender']; ?></a>
-                      </li>
-                      <li class="list-group-item">
                         <b>Email</b> <a class="float-right"><?php echo $_SESSION['email']; ?></a>
-                      </li>
-                      <li class="list-group-item">
-                        <b>Phone number</b> <a class="float-right"><?php echo $_SESSION['Pnum']; ?></a>
                       </li>
                     </ul>
 
-                    <a href="#settings" class="btn btn-primary btn-block"><b>EDIT</b></a>
                   </div>
                   <!-- /.card-body -->
                 </div>
@@ -183,10 +193,10 @@ if (isset($_SESSION['ID'])) {
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                    <strong><i class="fas fa-book mr-1"></i> Phone Number</strong>
 
                     <p class="text-muted">
-                      <?php echo $_SESSION['Education']; ?>
+                      <?php echo $_SESSION['Pnum']; ?>
                     </p>
 
                     <hr>
@@ -199,17 +209,19 @@ if (isset($_SESSION['ID'])) {
 
                     <hr>
 
-                    <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                    <strong><i class="fas fa-mars mr-1"></i> Gender</strong>
 
-                    <p class="text-muted"> <?php echo $_SESSION['Skills']; ?>
+                    <p class="text-muted"> <?php echo $_SESSION['gender']; ?>
 
                     </p>
 
                     <hr>
 
-                    <strong><i class="far fa-file-alt mr-1"></i> Experience</strong>
+                    <strong><i class="bi bi-balloon-heart"></i> Birthday</strong>
 
-                    <p class="text-muted"><?php echo $_SESSION['Experience'] ?></p>
+                    <p class="text-muted">
+                      <?php echo ($_SESSION['birthday'] == '0000-00-00') ? '' : date('F d, Y', strtotime($_SESSION['birthday'])); ?>
+                    </p>
                   </div>
                   <!-- /.card-body -->
                 </div>

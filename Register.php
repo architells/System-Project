@@ -20,18 +20,17 @@
 
   <style>
     .wider-form {
-      max-width: 800px;
+      max-width: 700px;
     }
   </style>
 </head>
 
-<body class="hold-transition login-page"
-  style="background: url('PIC_SET.jpg') no-repeat center center fixed; background-size: cover;">
+<body class="hold-transition login-page" style="background: url('GYM-IMG.jpg') no-repeat center center fixed; background-size: cover;">
 
   <div class="container">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
       <div class="col-md-8 wider-form">
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-primary" style="opacity: 0.9;">
           <div class="card-header text-center">
             <h1 style="font-size: 50px;">Register</h1>
           </div>

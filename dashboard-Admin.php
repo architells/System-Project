@@ -5,6 +5,20 @@ session_start();
 // Check if the user is logged in
 if (isset($_SESSION['ID'])) {
 
+  include "db_conn.php"; // Include database connection here
+
+  // Fetch course data for the donut chart
+  $courses = [];
+  $count_data = [];
+  $course_sql = "SELECT Course, COUNT(*) as course_count FROM students WHERE Role = 'student' GROUP BY Course";
+  $course_result = $conn->query($course_sql);
+
+  if ($course_result->num_rows > 0) {
+    while ($row = $course_result->fetch_assoc()) {
+      $courses[] = $row['Course'];
+      $count_data[] = $row['course_count'];
+    }
+  }
   ?>
 
   <!DOCTYPE html>
@@ -53,10 +67,6 @@ if (isset($_SESSION['ID'])) {
         </ul>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-          <form action="logout.php" method="post" style="display: inline;">
-            <button class="btn btn-primary" type="submit">Logout</button>
-          </form>
 
 
 
@@ -88,7 +98,7 @@ if (isset($_SESSION['ID'])) {
                 style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="#"
+              <a href="profile-admin.php"
                 class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
@@ -110,9 +120,9 @@ if (isset($_SESSION['ID'])) {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-person-lines-fill"></i>
-                  <p>&nbsp;&nbsp;Profile</p>
+                <a href="dashboard-Admin.php" class="nav-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <p>&nbsp;&nbsp;Dashboard</p>
                 </a>
               </li>
 
@@ -120,6 +130,13 @@ if (isset($_SESSION['ID'])) {
                 <a href="Announcement.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Logout.php" class="nav-link">
+                  <i class="bi bi-door-open"></i>
+                  <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
             </ul>
@@ -141,12 +158,30 @@ if (isset($_SESSION['ID'])) {
 
 
             </div><!-- /.row -->
+
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Courses</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;">
+                </canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
             <div class="container mt-5">
               <div class="row">
 
                 <div class="container">
                   <div class="row">
-                    <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center"> <!-- Center the column -->
+                    <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+                      <!-- Center the column -->
                       <div class="card text-center">
                         <div class="card-body">
                           <h2 class="card-title">Number of Students Logged In</h2>
@@ -219,6 +254,8 @@ if (isset($_SESSION['ID'])) {
                 </div>
               </div>
             </div>
+
+
 
 
 
@@ -306,6 +343,28 @@ if (isset($_SESSION['ID'])) {
       <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
       <script src="dist/js/pages/dashboard3.js"></script>
   </body>
+  <script>
+    $(function () {
+      var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+      var donutData = {
+        labels: <?php echo json_encode($courses); ?>,
+        datasets: [{
+          data: <?php echo json_encode($count_data); ?>,
+          backgroundColor: ['#FFFF00', '#FF7D33', '#FF0000', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        }]
+      };
+      var donutOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+
+      new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions
+      })
+    })
+  </script>
 
   </html>
 

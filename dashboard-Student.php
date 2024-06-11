@@ -14,7 +14,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student's Dashboard</title>
+    <title>GYM | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -53,13 +53,12 @@ if (isset($_SESSION['ID'])) {
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <form action="Logout-Students.php" method="post" style="display: inline;">
-            <button class="btn btn-primary" type="submit">Logout</button>
-          </form>
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+          </li>
         </ul>
-
-
-
       </nav>
 
 
@@ -109,11 +108,17 @@ if (isset($_SESSION['ID'])) {
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+              <li class="nav-item">
+                <a href="dashboard-Student.php" class="nav-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <p>&nbsp;&nbsp;Dashboard</p>
+                </a>
+              </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="student-updates.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
-                  <p>&nbsp;&nbsp;Updates</p>
+                  <p>&nbsp;&nbsp;Announcements</p>
                 </a>
               </li>
 
@@ -121,6 +126,20 @@ if (isset($_SESSION['ID'])) {
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-envelope-check"></i>
+                  <p>&nbsp;&nbsp;Verify Email</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Logout-students.php" class="nav-link">
+                  <i class="bi bi-door-open"></i>
+                  <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
 
@@ -174,15 +193,6 @@ if (isset($_SESSION['ID'])) {
                   </div>
                 </div>
               </div>
-
-
-
-
-
-
-
-
-
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
