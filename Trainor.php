@@ -134,13 +134,13 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Trainor</h1>
+                <h1 style="color: white;">Trainor</h1>
               </div>
               <div class="col-sm-6">
               </div>

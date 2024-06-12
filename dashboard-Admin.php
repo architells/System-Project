@@ -134,7 +134,7 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -153,8 +153,16 @@ if (isset($_SESSION['ID'])) {
                 </div>
               </div>
               <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;">
-                </canvas>
+                <div class="row">
+                  <div class="col-md-8">
+                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <div class="col-md-4">
+                    <ul id="course-counts">
+                      <!-- Course counts will be populated here -->
+                    </ul>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -323,6 +331,13 @@ if (isset($_SESSION['ID'])) {
         data: donutData,
         options: donutOptions
       })
+
+      // Populate course counts
+      var courseCounts = <?php echo json_encode(array_combine($courses, $count_data)); ?>;
+      var courseCountsList = $('#course-counts');
+      for (var course in courseCounts) {
+        courseCountsList.append('<li>' + course + ' - ' + courseCounts[course] + '</li>');
+      }
     })
     document.getElementById('logout-link').addEventListener('click', function (event) {
       event.preventDefault();
@@ -368,4 +383,4 @@ if (isset($_SESSION['ID'])) {
   header("Location: Login.php");
   exit();
 }
-?>
+

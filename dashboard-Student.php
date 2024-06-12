@@ -138,7 +138,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -150,52 +151,44 @@ if (isset($_SESSION['ID'])) {
                       style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
                       src="<?php echo $Profile_pic; ?>" alt="User profile picture">
                   </div>
-
-                  <div class="col-md-8 mt-3">
-                    <div class="card">
-                      <div class="card-body d-flex flex-column">
-
-                        <div class="mb-3">
-                          <label for="student_id" class="form-label">Student ID</label>
-                          <h6><?php echo $_SESSION['s_ID'] ?></h6>
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="fullname" class="form-label">Fullname</label>
-                          <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></h6>
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="course" class="form-label">Course</label>
-                          <h6><?php echo $_SESSION['course'] ?></h6>
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="year_level" class="form-label">Year Level</label>
-                          <h6><?php echo $_SESSION['year_level'] ?></h6>
-                        </div>
-
-                        <!-- Display QR Code -->
-                        <div class="row justify-content-end mt-auto">
-                          <div class="col-auto">
-                            <?php
-                            $qrCodeFilePath = 'qr_codes/' . $_SESSION['qrCodeFile'];
-                            if (file_exists($qrCodeFilePath)) {
-                              echo '<img src="' . $qrCodeFilePath . '" alt="QR Code" style="height: 200px; width: 200px;">';
-                            } else {
-                              echo 'QR Code image not found';
-                            }
-                            ?>
+                  <div class="col-md-8 mt-3 d-flex flex-column">
+                    <div class="card mb-3" style="position: relative;">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label for="student_id" class="form-label">Student ID</label>
+                            <h6><?php echo $_SESSION['s_ID'] ?></h6>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="fullname" class="form-label">Fullname</label>
+                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                            </h6>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <h6><?php echo $_SESSION['course'] ?></h6>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="year_level" class="form-label">Year Level</label>
+                            <h6><?php echo $_SESSION['year_level'] ?></h6>
                           </div>
                         </div>
-
+                      </div>
+                      <!-- Display QR Code -->
+                      <div style="position: absolute; top: 10px; right: 10px;">
+                        <?php
+                        $qrCodeFilePath = 'qr_codes/' . $_SESSION['qrCodeFile'];
+                        if (file_exists($qrCodeFilePath)) {
+                          echo '<img src="' . $qrCodeFilePath . '" alt="QR Code" style="height: 100px; width: 100px;">';
+                        } else {
+                          echo 'QR Code image not found';
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
-
 
 
               <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
