@@ -7,10 +7,14 @@ if (isset($_SESSION['ID'])) {
 
   include "db_conn.php"; // Include database connection here
 
-  // Fetch course data for the donut chart
+  // Fetch course data for the donut chart for the last day
   $courses = [];
   $count_data = [];
-  $course_sql = "SELECT Course, COUNT(*) as course_count FROM students WHERE Role = 'student' GROUP BY Course";
+  $one_day_ago = date('Y-m-d H:i:s', strtotime('-1 day'));
+  $course_sql = "SELECT Course, COUNT(*) as course_count 
+               FROM students 
+               WHERE Role = 'student' AND Login_Time >= '$one_day_ago' 
+               GROUP BY Course";
   $course_result = $conn->query($course_sql);
 
   if ($course_result->num_rows > 0) {
@@ -65,11 +69,6 @@ if (isset($_SESSION['ID'])) {
             <h2 class="m-0">Dashboard</h2>
           </li>
         </ul>
-
-        <!-- Right navbar links -->
-
-
-
       </nav>
 
 
@@ -77,8 +76,7 @@ if (isset($_SESSION['ID'])) {
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-          <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+          <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Admin</span>
         </a>
 
@@ -103,17 +101,6 @@ if (isset($_SESSION['ID'])) {
             </div>
           </div>
 
-          <!-- SidebarSearch Form -->
-          <!-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> -->
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
@@ -134,7 +121,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="Logout.php" class="nav-link">
+                <a id="logout-link" class="nav-link">
                   <i class="bi bi-door-open"></i>
                   <p>&nbsp;&nbsp;Logout</p>
                 </a>
@@ -153,10 +140,6 @@ if (isset($_SESSION['ID'])) {
           <div class="container-fluid">
             <div class="row mb-2">
               <!-- /.col -->
-
-
-
-
             </div><!-- /.row -->
 
             <div class="card card-danger">
@@ -175,114 +158,99 @@ if (isset($_SESSION['ID'])) {
               </div>
               <!-- /.card-body -->
             </div>
-            <div class="container mt-5">
-              <div class="row">
 
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
-                      <!-- Center the column -->
-                      <div class="card text-center">
-                        <div class="card-body">
-                          <h2 class="card-title">Number of Students Logged In</h2>
-                          <p class="card-text">
-                            <?php
-                            include "db_conn.php";
-                            $count_sql = "SELECT COUNT(*) AS student_count FROM students WHERE Role = 'student'";
-                            $count_result = $conn->query($count_sql);
-                            $student_count = 0;
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Student Logged In</h3>
 
-                            if ($count_result->num_rows > 0) {
-                              $count_row = $count_result->fetch_assoc();
-                              $student_count = $count_row["student_count"];
-                            }
-                            echo $student_count;
-                            ?>
-                          </p>
+                    <div class="card-tools">
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" id="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                          <button type="button" id="search_button" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-
-
-                <!-- Logged In Students Details -->
-                <div class="col-md-9 mx-auto">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th style="width: 15%; text-align: Center;">Student ID</th>
-                              <th style="width: 20%; text-align: Center;">Fullname</th>
-                              <th style="width: 15%; text-align: Center;">Course</th>
-                              <th style="width: 10%; text-align: Center;">Year</th>
-                              <th style="width: 15%; text-align: Center;">Login Time</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <?php
-                            include "db_conn.php";
-                            $sql = "SELECT Student_ID, First_name, Middle_name ,Last_name, Email, Login_Time, Course, Year_level FROM students WHERE Role = 'student'";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                              while ($row = $result->fetch_assoc()) {
-                                $LoginTime = date('Y-m-d H:i:s', strtotime($row['Login_Time']));
-                                ?>
-                                <tr>
-                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Student_ID']); ?></td>
-                                  <td style="text-align: Center;">
-                                    <?php echo htmlspecialchars($row['Last_name']) . ', ' . $row['First_name'] . ' ' . $row['Middle_name'] . '.'; ?>
-                                  </td>
-                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Course']); ?></td>
-                                  <td style="text-align: Center;"><?php echo htmlspecialchars($row['Year_level']); ?></td>
-                                  <td style="text-align: Center;"><?php echo htmlspecialchars($LoginTime); ?></td>
-                                </tr>
-                                <?php
-                              }
-                            } else {
-                              echo "<tr><td colspan='6'> No Students found. </td></tr>";
-                            }
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center;">#</th>
+                          <th style="text-align: center;">Student ID</th>
+                          <th style="text-align: center;">Fullname</th>
+                          <th style="text-align: center;">Course</th>
+                          <th style="text-align: center;">Year Level</th>
+                          <th style="text-align: center;">Login Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include "db_conn.php";
+                        $one_day_ago = date('Y-m-d H:i:s', strtotime('-1 day'));
+                        $sql = "SELECT Student_ID, First_name, Middle_name, Last_name, Email, Login_Time, Course, Year_level 
+                                FROM students 
+                                WHERE Role = 'student' AND Login_Time >= '$one_day_ago'
+                                ORDER BY Last_name ASC";
+                        $result = $conn->query($sql);
+                        $id = 1; 
+                        if ($result->num_rows > 0) {
+                          while ($row = $result->fetch_assoc()) {
+                            $loginTime = new DateTime($row['Login_Time']);
+                            $formattedDate = $loginTime->format('Y-m-d h:i A');
                             ?>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                            <tr>
+                              <td style="text-align: center;"><?php echo $id; ?></td>
+                              <td style="text-align: center;"><?php echo htmlspecialchars($row['Student_ID']); ?></td>
+                              <td style="text-align: center;">
+                                <?php echo htmlspecialchars($row['Last_name']) . ', ' . htmlspecialchars($row['First_name']) . ' ' . htmlspecialchars($row['Middle_name']) . '.'; ?>
+                              </td>
+                              <td style="text-align: center;"><?php echo htmlspecialchars($row['Course']); ?></td>
+                              <td style="text-align: center;"><?php echo htmlspecialchars($row['Year_level']); ?></td>
+                              <td style="text-align: center;"><?php echo htmlspecialchars($formattedDate); ?></td>
+                            </tr>
+                            <?php
+                            $id++; 
+                          }
+                        } else {
+                          echo "<tr><td colspan='6' style='text-align: center;'> No Students found. </td></tr>";
+                        }
+                        ?>
+                      </tbody>
+                    </table>
                   </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+
+          <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <a href="Logout-admin.php" class="btn btn-primary">Yes</a>
                 </div>
               </div>
             </div>
-
-
-
-
-
-          </div><!-- /.container-fluid -->
-        </div>
-        <!-- <div class="section-2">
-          <div class="row">
-            <div class="column">
-              <div class="card">
-                <p><i class="fa fa-user"></i></p>
-                <h3 class="counter">12</h3>
-                <h5>student</h5>
-              </div>
-            </div>
           </div>
         </div>
-        <div class="section-3">
-          <div class="row">
-            <div class="column">
-              <div class="card">
-                <p><i class="fa fa-user"></i></p>
-                <h3 class="counter-2">12</h3>
-                <h5>admin</h5>
-              </div>
-            </div>
-          </div>
-        </div> -->
 
         <!-- /.content-header -->
 
@@ -292,15 +260,7 @@ if (isset($_SESSION['ID'])) {
             <div class="row">
               <div class="col-lg-6">
                 <div class="card">
-                  <!-- <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-              
-                  
-              </table>
-            </div> -->
                 </div>
-
-
               </div>
 
             </div>
@@ -350,7 +310,7 @@ if (isset($_SESSION['ID'])) {
         labels: <?php echo json_encode($courses); ?>,
         datasets: [{
           data: <?php echo json_encode($count_data); ?>,
-          backgroundColor: ['#FFFF00', '#FF7D33', '#FF0000', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          backgroundColor: ['#FFFF00', '#FF7D33', '#FF0000', '#008000', '#3c8dbc', '#d2d6de'],
         }]
       };
       var donutOptions = {
@@ -364,6 +324,40 @@ if (isset($_SESSION['ID'])) {
         options: donutOptions
       })
     })
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#logout-modal').modal('show');
+    });
+  </script>
+
+  <script>
+    document.getElementById('table_search').addEventListener('input', function () {
+      var searchText = this.value.toLowerCase();
+      var tableRows = document.querySelectorAll('.table tbody tr');
+
+      tableRows.forEach(function (row) {
+        var rowData = row.textContent.toLowerCase();
+        if (rowData.indexOf(searchText) === -1) {
+          row.style.display = 'none';
+        } else {
+          row.style.display = '';
+        }
+      });
+    });
+
+    document.getElementById('search_button').addEventListener('click', function () {
+      var searchText = document.getElementById('table_search').value.toLowerCase();
+      var tableRows = document.querySelectorAll('.table tbody tr');
+
+      tableRows.forEach(function (row) {
+        var rowData = row.textContent.toLowerCase();
+        if (rowData.indexOf(searchText) === -1) {
+          row.style.display = 'none';
+        } else {
+          row.style.display = '';
+        }
+      });
+    });
   </script>
 
   </html>

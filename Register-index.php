@@ -18,7 +18,7 @@ if (
     isset($_POST['retypepassword'])
 ) {
 
-// Function to validate input data
+    // Function to validate input data
     function validate($data)
     {
         $data = trim($data);
@@ -132,3 +132,4 @@ if (
     header("Location: Register.php");
     exit();
 }
+

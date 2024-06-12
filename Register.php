@@ -25,7 +25,8 @@
   </style>
 </head>
 
-<body class="hold-transition login-page" style="background: url('GYM-IMG.jpg') no-repeat center center fixed; background-size: cover;">
+<body class="hold-transition login-page"
+  style="background: url('GYM-IMG.jpg') no-repeat center center fixed; background-size: cover;">
 
   <div class="container">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
@@ -104,8 +105,13 @@
                 </div>
               </div>
               <div class="input-group mb-3">
-                <input type="text" name="year_level" class="form-control" placeholder="Year level"
-                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                <select name="year_level" class="form-control">
+                  <option value="" selected>Select Year Level</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="bi bi-calendar"></span>

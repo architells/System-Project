@@ -57,8 +57,7 @@ if (isset($_SESSION['ID'])) {
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="dashboard-Student.php" class="brand-link">
-          <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+          <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">STUDENT</span>
         </a>
 
@@ -121,7 +120,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="Logout-students.php" class="nav-link">
+                <a id="logout-link" class="nav-link">
                   <i class="bi bi-door-open"></i>
                   <p>&nbsp;&nbsp;Logout</p>
                 </a>
@@ -153,7 +152,11 @@ if (isset($_SESSION['ID'])) {
         <section class="content">
           <?php
           include "db_conn.php";
-          $sql = "SELECT event_name, description, Created_At FROM announcement ORDER BY created_At DESC LIMIT 1";
+          // Get the current date and subtract 7 days
+          $one_week_ago = date('Y-m-d H:i:s', strtotime('-1 week'));
+
+          // Updated SQL query to fetch announcements within the last week
+          $sql = "SELECT event_name, description, Created_At FROM announcement WHERE Created_At >= '$one_week_ago' ORDER BY Created_At DESC LIMIT 1";
           $result = $conn->query($sql);
 
           if ($result === false) {
@@ -209,6 +212,25 @@ if (isset($_SESSION['ID'])) {
           ?>
         </section>
 
+        <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to logout?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <a href="Logout-students.php" class="btn btn-primary">Yes</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
 
 
 
@@ -243,6 +265,14 @@ if (isset($_SESSION['ID'])) {
   </body>
 
   </html>
+
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#logout-modal').modal('show');
+    });
+  </script>
+
   <?php
 } else {
   // If the user is not logged in, redirect to the login page

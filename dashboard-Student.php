@@ -66,8 +66,7 @@ if (isset($_SESSION['ID'])) {
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="dashboard-Student.php" class="brand-link">
-          <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+          <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">STUDENT</span>
         </a>
 
@@ -91,18 +90,6 @@ if (isset($_SESSION['ID'])) {
                 class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
-
-          <!-- SidebarSearch Form -->
-          <!-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> -->
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
@@ -137,7 +124,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="Logout-students.php" class="nav-link">
+                <a id="logout-link" class="nav-link">
                   <i class="bi bi-door-open"></i>
                   <p>&nbsp;&nbsp;Logout</p>
                 </a>
@@ -156,14 +143,6 @@ if (isset($_SESSION['ID'])) {
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <!-- /.col -->
-              <!-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
-            </ol> -->
-
-
               <div class="container mt-5">
                 <div class="row align-items-center">
                   <div class="col-md-4 text-center">
@@ -171,24 +150,67 @@ if (isset($_SESSION['ID'])) {
                       style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
                       src="<?php echo $Profile_pic; ?>" alt="User profile picture">
                   </div>
+
                   <div class="col-md-8 mt-3">
                     <div class="card">
                       <div class="card-body d-flex flex-column">
-                        <h6>Student ID : &nbsp;&nbsp;<?php echo $_SESSION['s_ID'] ?></h6>
-                        <h6>Fullname :
-                          &nbsp;&nbsp;<?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
-                        </h6>
-                        <h6>Course : &nbsp;&nbsp;<?php echo $_SESSION['course'] ?></h6>
-                        <h6>Year : &nbsp;&nbsp;<?php echo $_SESSION['year_level'] ?></h6>
+
+                        <div class="mb-3">
+                          <label for="student_id" class="form-label">Student ID</label>
+                          <h6><?php echo $_SESSION['s_ID'] ?></h6>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="fullname" class="form-label">Fullname</label>
+                          <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></h6>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="course" class="form-label">Course</label>
+                          <h6><?php echo $_SESSION['course'] ?></h6>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="year_level" class="form-label">Year Level</label>
+                          <h6><?php echo $_SESSION['year_level'] ?></h6>
+                        </div>
 
                         <!-- Display QR Code -->
-                        <div class="row justify-content-end mt-auto pb-3">
-                          <div class="col-auto mt-3">
-                            <img src="<?php echo $_SESSION['qrCodeFile']; ?>" alt="QR Code"
-                              style="height: 200px; width: 200px;">
+                        <div class="row justify-content-end mt-auto">
+                          <div class="col-auto">
+                            <?php
+                            $qrCodeFilePath = 'qr_codes/' . $_SESSION['qrCodeFile'];
+                            if (file_exists($qrCodeFilePath)) {
+                              echo '<img src="' . $qrCodeFilePath . '" alt="QR Code" style="height: 200px; width: 200px;">';
+                            } else {
+                              echo 'QR Code image not found';
+                            }
+                            ?>
                           </div>
                         </div>
+
                       </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to logout?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <a href="Logout-students.php" class="btn btn-primary">Yes</a>
                     </div>
                   </div>
                 </div>
@@ -206,9 +228,7 @@ if (isset($_SESSION['ID'])) {
             <div class="col-lg-6">
 
 
-
             </div>
-
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -251,6 +271,13 @@ if (isset($_SESSION['ID'])) {
   </body>
 
   </html>
+
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#logout-modal').modal('show');
+    });
+  </script>
 
   <?php
 } else {
