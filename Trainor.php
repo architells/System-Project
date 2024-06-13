@@ -57,8 +57,7 @@ if (isset($_SESSION['ID'])) {
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="dashboard-Student.php" class="brand-link">
-          <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+          <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">STUDENT</span>
         </a>
 
@@ -134,7 +133,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -150,33 +150,159 @@ if (isset($_SESSION['ID'])) {
 
         <!-- Main content -->
         <section class="content">
-          <div class="col-md-4 text-center">
-            <img class="profile-user-img img-fluid img-circle"
-              style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;" src="BINI GWEN.jpg"
-              alt="BINI GWEN">
+
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+              <div class="card bg-light d-flex flex-fill">
+                <div class="card-header text-muted border-bottom-0">
+                  Full Body Workout
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>Gwen Apuli</b></h2>
+                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
+                          Puso mo</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
+                      </ul>
+                    </div>
+                    <div class="col-5 text-center">
+                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
+                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="text-right">
+                    <a href="#" class="btn btn-sm bg-teal">
+                      <i class="fas fa-comments"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-primary" id="profile-link">
+                      <i class="fas fa-user"></i> View Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+              <div class="card bg-light d-flex flex-fill">
+                <div class="card-header text-muted border-bottom-0">
+                  Biceps
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>Mikha</b></h2>
+                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
+                          Puso mo</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
+                      </ul>
+                    </div>
+                    <div class="col-5 text-center">
+                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
+                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="text-right">
+                    <a href="#" class="btn btn-sm bg-teal">
+                      <i class="fas fa-comments"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-primary">
+                      <i class="fas fa-user"></i> View Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+              <div class="card bg-light d-flex flex-fill">
+                <div class="card-header text-muted border-bottom-0">
+                  Leg
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>Aiah</b></h2>
+                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
+                          Puso mo</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
+                      </ul>
+                    </div>
+                    <div class="col-5 text-center">
+                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
+                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="text-right">
+                    <a href="#" class="btn btn-sm bg-teal">
+                      <i class="fas fa-comments"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-primary">
+                      <i class="fas fa-user"></i> View Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
+
+
+
+
+      <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="logout-modal-label">Profile</h5>
+            </div>
+            <div class="modal-body text-center">
+              <H1>Gwen Apuli</H1>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <a href="#" class="btn btn-primary">Yes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
       <!-- /.card-body -->
       <div class="card-footer">
         .
 
         <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-                    </div>
-                    <div class="modal-body">
-                      Are you sure you want to logout?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                      <a href="Logout-students.php" class="btn btn-primary">Yes</a>
-                    </div>
-                  </div>
-                </div>
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
               </div>
+              <div class="modal-body">
+                Are you sure you want to logout?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <a href="Logout-students.php" class="btn btn-primary">Yes</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.card-footer-->
     </div>
@@ -219,8 +345,24 @@ if (isset($_SESSION['ID'])) {
       event.preventDefault();
       $('#logout-modal').modal('show');
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const navlinks = document.querySelectorAll('.nav-link');
+
+      navlinks.forEach(link => {
+        link.addEventListener('click', function () {
+          navlinks.forEach(nav => nav.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+
+    document.getElementById('profile-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#profile-modal').modal('show');
+    });
   </script>
-  
+
   <?php
 } else {
   // If the user is not logged in, redirect to the login page

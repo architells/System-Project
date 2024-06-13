@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="shortcut icon" href="dumbbell.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gym Login</title>
+  <title>GYM | Login</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -82,8 +82,14 @@
               <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
               </div>
+
+              <div class="col-12 text-right">
+                <a href="Forgot-password.php" class="forgot-password" style="font-size: 15px; font-style: italic; margin-top: 10px;">Forgot Password?</a>
+              </div>
               <!-- /.col -->
             </div>
+
+
           </form>
 
           <hr>

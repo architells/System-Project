@@ -4,12 +4,10 @@ session_start();
 
 // Check if the user is logged in
 if (isset($_SESSION['ID'])) {
-
   ?>
 
   <!DOCTYPE html>
   <html lang="en">
-
   <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
@@ -17,8 +15,7 @@ if (isset($_SESSION['ID'])) {
     <title>GYM | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -27,16 +24,6 @@ if (isset($_SESSION['ID'])) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
   </head>
-  <!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
-
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
       <!-- Navbar -->
@@ -50,7 +37,6 @@ if (isset($_SESSION['ID'])) {
             <h2 class="m-0">Dashboard</h2>
           </li>
         </ul>
-
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -60,7 +46,6 @@ if (isset($_SESSION['ID'])) {
           </li>
         </ul>
       </nav>
-
 
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -83,53 +68,46 @@ if (isset($_SESSION['ID'])) {
             ?>
             <div class="image">
               <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image"
-                style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
+                   style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="profile.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+              <a href="profile.php" class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
               <li class="nav-item">
                 <a href="dashboard-Student.php" class="nav-link">
                   <i class="bi bi-speedometer2"></i>
                   <p>&nbsp;&nbsp;Dashboard</p>
                 </a>
               </li>
-
               <li class="nav-item">
                 <a href="student-updates.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcements</p>
                 </a>
               </li>
-
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
                   <p>&nbsp;&nbsp;Trainor</p>
                 </a>
               </li>
-
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="bi bi-envelope-check"></i>
                   <p>&nbsp;&nbsp;Verify Email</p>
                 </a>
               </li>
-
               <li class="nav-item">
                 <a id="logout-link" class="nav-link">
                   <i class="bi bi-door-open"></i>
                   <p>&nbsp;&nbsp;Logout</p>
                 </a>
               </li>
-
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -139,7 +117,7 @@ if (isset($_SESSION['ID'])) {
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper"
-        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+           style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -148,8 +126,8 @@ if (isset($_SESSION['ID'])) {
                 <div class="row align-items-center">
                   <div class="col-md-4 text-center">
                     <img class="profile-user-img img-fluid img-circle"
-                      style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
-                      src="<?php echo $Profile_pic; ?>" alt="User profile picture">
+                         style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
+                         src="<?php echo $Profile_pic; ?>" alt="User profile picture">
                   </div>
                   <div class="col-md-8 mt-3 d-flex flex-column">
                     <div class="card mb-3" style="position: relative;">
@@ -161,8 +139,7 @@ if (isset($_SESSION['ID'])) {
                           </div>
                           <div class="col-md-6 mb-3">
                             <label for="fullname" class="form-label">Fullname</label>
-                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
-                            </h6>
+                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></h6>
                           </div>
                           <div class="col-md-6 mb-3">
                             <label for="course" class="form-label">Course</label>
@@ -190,9 +167,7 @@ if (isset($_SESSION['ID'])) {
                 </div>
               </div>
 
-
-              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-                aria-hidden="true">
+              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -219,8 +194,7 @@ if (isset($_SESSION['ID'])) {
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-6">
-
-
+              <!-- Additional content can go here -->
             </div>
           </div>
           <!-- /.container-fluid -->
@@ -237,40 +211,48 @@ if (isset($_SESSION['ID'])) {
 
       <!-- Main Footer -->
       <!-- <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer> -->
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+          <b>Version</b> 3.2.0
+        </div>
+      </footer> -->
     </div>
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="dist/js/adminlte.js"></script>
-
     <!-- OPTIONAL SCRIPTS -->
     <script src="plugins/chart.js/Chart.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard3.js"></script>
+
+    <script>
+      document.getElementById('logout-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        $('#logout-modal').modal('show');
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const navlinks = document.querySelectorAll('.nav-link');
+
+        navlinks.forEach(link => {
+          link.addEventListener('click', function () {
+            navlinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      });
+    </script>
   </body>
-
   </html>
-
-  <script>
-    document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
-    });
-  </script>
 
   <?php
 } else {
@@ -278,4 +260,4 @@ if (isset($_SESSION['ID'])) {
   header("Location: Login.php");
   exit();
 }
-?>
+

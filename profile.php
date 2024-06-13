@@ -135,7 +135,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -375,17 +376,17 @@ if (isset($_SESSION['ID'])) {
                               <?php echo $_GET['success3']; ?>
                             </div>
                           <?php } ?>
-                          <!-- Upload Picture -->
-                          <div class="form-group row">
-                            <label for="inputChangePicture" class="col-sm-2 col-form-label">Upload picture</label>
-                            <div class="col-sm-10">
-                              <input type="file" name="file">
-                            </div>
-                          </div>
-                          <!-- Update Profile Button -->
-                          <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10 text-right">
-                              <button type="submit" class="btn btn-primary" name="upload">Update profile</button>
+                          <!-- Update Profile Button and Upload Picture -->
+                          <div class="form-group">
+                            <label for="exampleInputFile">Upload Picture</label>
+                            <div class="input-group">
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                              </div>
+                              <div class="input-group-append">
+                                <button class="input-group-text" type="submit" name="upload">Upload</button>
+                              </div>
                             </div>
                           </div>
                         </form>
@@ -455,6 +456,23 @@ if (isset($_SESSION['ID'])) {
       event.preventDefault();
       $('#logout-modal').modal('show');
     });
+
+    document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+      var fileName = document.getElementById("exampleInputFile").files[0].name;
+      var nextSibling = e.target.nextElementSibling
+      nextSibling.innerText = fileName
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const navlinks = document.querySelectorAll('.nav-link');
+
+        navlinks.forEach(link => {
+          link.addEventListener('click', function () {
+            navlinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      });
   </script>
 
   <?php

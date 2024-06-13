@@ -271,6 +271,17 @@ if (isset($_SESSION['ID'])) {
       event.preventDefault();
       $('#logout-modal').modal('show');
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const navlinks = document.querySelectorAll('.nav-link');
+
+        navlinks.forEach(link => {
+          link.addEventListener('click', function () {
+            navlinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      });
   </script>
 
   <?php
