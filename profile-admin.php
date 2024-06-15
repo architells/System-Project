@@ -100,6 +100,20 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
+                <a href="Add_trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
+                  <p>&nbsp;&nbsp;Add Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>&nbsp;&nbsp;Trainor Profile</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="Announcement.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
@@ -121,7 +135,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -440,7 +455,7 @@ if (isset($_SESSION['ID'])) {
       $('#logout-modal').modal('show');
     });
   </script>
-  
+
   <?php
 } else {
   // If the user is not logged in, redirect to the login page

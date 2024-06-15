@@ -100,6 +100,13 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
+                <a href="Qr_code.php" class="nav-link">
+                  <i class="bi bi-qr-code"></i>
+                  <p>&nbsp;&nbsp;Qr Code</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="Student-updates.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcements</p>
@@ -331,7 +338,7 @@ if (isset($_SESSION['ID'])) {
 
                           <!-- Old Password -->
                           <div class="form-group row">
-                            <label for="inputChangePassword" class="col-sm-2 col-form-label">Change Password</label>
+                            <label for="inputChangePassword" class="col-sm-2 col-form-label">Current Password</label>
                             <div class="col-sm-10">
                               <input type="password" class="form-control" name="oldPass" id="inputChangePassword"
                                 placeholder="Old password">
@@ -343,6 +350,14 @@ if (isset($_SESSION['ID'])) {
                             <div class="col-sm-10">
                               <input type="password" class="form-control" name="newPass" id="inputNewPassword"
                                 placeholder="New password">
+                            </div>
+                          </div>
+                          <!-- Confirmation Password -->
+                          <div class="form-group row">
+                            <label for="inputNewPassword" class="col-sm-2 col-form-label">Confirmation</label>
+                            <div class="col-sm-10">
+                              <input type="password" class="form-control" name="confirm" id="inputNewPassword"
+                                placeholder="Confirm password">
                             </div>
                           </div>
                           <!-- Update Password Button -->
@@ -464,21 +479,21 @@ if (isset($_SESSION['ID'])) {
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        const navlinks = document.querySelectorAll('.nav-link');
+      const navlinks = document.querySelectorAll('.nav-link');
 
-        navlinks.forEach(link => {
-          link.addEventListener('click', function () {
-            navlinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-          });
+      navlinks.forEach(link => {
+        link.addEventListener('click', function () {
+          navlinks.forEach(nav => nav.classList.remove('active'));
+          this.classList.add('active');
         });
       });
+    });
   </script>
 
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Front-Page.php");
+  header("Location: Login.php");
   exit();
 }
 ?>

@@ -12,8 +12,9 @@ if (isset($_SESSION['ID'])) {
 
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GYM | Announcements</title>
+    <title>GYM | Qr Code</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="shortcut icon" href="dumbbell.png">
@@ -21,9 +22,10 @@ if (isset($_SESSION['ID'])) {
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
   </head>
 
   <body class="hold-transition sidebar-mini">
@@ -36,6 +38,7 @@ if (isset($_SESSION['ID'])) {
           <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
+
         </ul>
 
         <!-- Right navbar links -->
@@ -50,9 +53,9 @@ if (isset($_SESSION['ID'])) {
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="dashboard-Student.php" class="brand-link">
+        <a href="dashboard-Admin.php" class="brand-link">
           <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">STUDENT</span>
+          <span class="brand-text font-weight-light">Admin</span>
         </a>
 
         <!-- Sidebar -->
@@ -71,7 +74,7 @@ if (isset($_SESSION['ID'])) {
                 style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="profile.php"
+              <a href="profile-admin.php"
                 class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
@@ -93,7 +96,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="Qr_code.php" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="bi bi-qr-code"></i>
                   <p>&nbsp;&nbsp;Qr Code</p>
                 </a>
@@ -134,84 +137,49 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 style="color: white;">Announcements</h1>
+                <h1 style="color: white;">Qr Code</h1>
               </div>
               <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                </ol>
               </div>
             </div>
           </div><!-- /.container-fluid -->
         </section>
 
-
         <!-- Main content -->
         <section class="content">
-          <?php
-          include "db_conn.php";
-          // Get the current date and subtract 7 days
-          $one_week_ago = date('Y-m-d H:i:s', strtotime('-1 week'));
 
-          // Updated SQL query to fetch announcements within the last week
-          $sql = "SELECT event_name, description, Created_At FROM announcement WHERE Created_At >= '$one_week_ago' ORDER BY Created_At DESC LIMIT 1";
-          $result = $conn->query($sql);
+          <!-- Default box -->
 
-          if ($result === false) {
-            ?>
-            <div class="container mt-4">
-              <div class="card">
-                <div class="card-header">
-                  Error executing the query: <?php echo $conn->error; ?>
-                </div>
-              </div>
-            </div>
-            <?php
-          } elseif ($result->num_rows > 0) {
-            $row = $result->fetch_assoc(); // Fetch the first (and only) row
-            // Format the Created_At field
-            $date = new DateTime($row["Created_At"]);
-            $formattedDate = $date->format('Y-m-d h:i A');
-            ?>
-            <div class="container mt-4">
-              <div class="card">
-                <div class="card-header">
-                  Latest Announcement
-                </div>
+          <!-- /.card -->
 
-                <div class="card-body">
-                  <label for="event_name">Event Name: </label>
-                  <p><?php echo $row["event_name"]; ?></p>
-                </div>
-
-                <div class="card-body">
-                  <label for="description">Description: </label>
-                  <p><?php echo $row["description"]; ?></p>
-                </div>
-
-                <div class="card-body">
-                  <label for="published">Date of Publication: </label>
-                  <p><?php echo $formattedDate; ?></p>
-                </div>
-              </div>
-            </div>
-            <?php
-          } else {
-            ?>
-            <div class="container mt-4">
-              <div class="card">
-                <div class="card-header">
-                  No announcements found.
-                </div>
-              </div>
-            </div>
-            <?php
-          }
-          ?>
         </section>
+        <div class="card card-primary card-outline w-50 mx-auto mt-5"
+          style="background-image: linear-gradient(90deg, rgba(165, 165, 165, 0.03) 0%, rgba(165, 165, 165, 0.03) 8%,rgba(235, 235, 235, 0.03) 8%, rgba(235, 235, 235, 0.03) 9%,rgba(7, 7, 7, 0.03) 9%, rgba(7, 7, 7, 0.03) 14%,rgba(212, 212, 212, 0.03) 14%, rgba(212, 212, 212, 0.03) 17%,rgba(219, 219, 219, 0.03) 17%, rgba(219, 219, 219, 0.03) 95%,rgba(86, 86, 86, 0.03) 95%, rgba(86, 86, 86, 0.03) 100%),linear-gradient(67.5deg, rgba(80, 80, 80, 0.03) 0%, rgba(80, 80, 80, 0.03) 11%,rgba(138, 138, 138, 0.03) 11%, rgba(138, 138, 138, 0.03) 17%,rgba(122, 122, 122, 0.03) 17%, rgba(122, 122, 122, 0.03) 24%,rgba(166, 166, 166, 0.03) 24%, rgba(166, 166, 166, 0.03) 27%,rgba(245, 245, 245, 0.03) 27%, rgba(245, 245, 245, 0.03) 89%,rgba(88, 88, 88, 0.03) 89%, rgba(88, 88, 88, 0.03) 100%),linear-gradient(67.5deg, rgba(244, 244, 244, 0.03) 0%, rgba(244, 244, 244, 0.03) 4%,rgba(16, 16, 16, 0.03) 4%, rgba(16, 16, 16, 0.03) 10%,rgba(157, 157, 157, 0.03) 10%, rgba(157, 157, 157, 0.03) 20%,rgba(212, 212, 212, 0.03) 20%, rgba(212, 212, 212, 0.03) 83%,rgba(5, 5, 5, 0.03) 83%, rgba(5, 5, 5, 0.03) 84%,rgba(237, 237, 237, 0.03) 84%, rgba(237, 237, 237, 0.03) 100%),linear-gradient(90deg, #ffffff,#ffffff);">
+          <div class="card-body box-profile">
+            <div class="col-md-12 text-center">
+              <?php
+              $qrCodeFilePath = 'qr_codes/' . $_SESSION['qrCodeFile'];
+              if (file_exists($qrCodeFilePath)) {
+                echo '<img src="' . $qrCodeFilePath . '" alt="QR Code" class="img-fluid" style="max-width: 100%; height: auto;">';
+              } else {
+                echo 'QR Code image not found';
+              }
+              ?>
+            </div>
+            <p class="text-center mt-3">Note: Please don't share this QR code</p>
+          </div>
+        </div>
+
+
 
         <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
           aria-hidden="true">
@@ -231,11 +199,6 @@ if (isset($_SESSION['ID'])) {
           </div>
         </div>
 
-
-
-
-
-
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
@@ -244,7 +207,7 @@ if (isset($_SESSION['ID'])) {
         <div class="float-right d-none d-sm-block">
           <b>Version</b> 3.2.0
         </div>
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io </a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
@@ -272,17 +235,6 @@ if (isset($_SESSION['ID'])) {
       event.preventDefault();
       $('#logout-modal').modal('show');
     });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const navlinks = document.querySelectorAll('.nav-link');
-
-        navlinks.forEach(link => {
-          link.addEventListener('click', function () {
-            navlinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-          });
-        });
-      });
   </script>
 
   <?php

@@ -36,12 +36,6 @@ if (isset($_SESSION['ID'])) {
           <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="dashboard-Student.php" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
         </ul>
 
         <!-- Right navbar links -->
@@ -95,6 +89,13 @@ if (isset($_SESSION['ID'])) {
                 <a href="dashboard-Student.php" class="nav-link">
                   <i class="bi bi-speedometer2"></i>
                   <p>&nbsp;&nbsp;Dashboard</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="Qr_code.php" class="nav-link">
+                  <i class="bi bi-qr-code"></i>
+                  <p>&nbsp;&nbsp;Qr Code</p>
                 </a>
               </li>
 
@@ -190,12 +191,12 @@ if (isset($_SESSION['ID'])) {
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light d-flex flex-fill">
                 <div class="card-header text-muted border-bottom-0">
-                  Biceps
+                  Biceps Workout
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b>Mikha</b></h2>
+                      <h2 class="lead"><b>Mikha Lim</b></h2>
                       <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
@@ -204,7 +205,7 @@ if (isset($_SESSION['ID'])) {
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
+                      <img src="BINI Mikha.jpg" alt="user-avatar" class="img-circle img-fluid"
                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
                     </div>
                   </div>
@@ -214,7 +215,7 @@ if (isset($_SESSION['ID'])) {
                     <a href="#" class="btn btn-sm bg-teal">
                       <i class="fas fa-comments"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a href="#" class="btn btn-sm btn-primary" id="profile-link-2">
                       <i class="fas fa-user"></i> View Profile
                     </a>
                   </div>
@@ -225,12 +226,12 @@ if (isset($_SESSION['ID'])) {
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light d-flex flex-fill">
                 <div class="card-header text-muted border-bottom-0">
-                  Leg
+                  Leg Workout
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b>Aiah</b></h2>
+                      <h2 class="lead"><b>Aiah Mama Mary</b></h2>
                       <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
@@ -239,7 +240,7 @@ if (isset($_SESSION['ID'])) {
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
+                      <img src="BINI AIAH♥.jpg" alt="user-avatar" class="img-circle img-fluid"
                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
                     </div>
                   </div>
@@ -249,7 +250,7 @@ if (isset($_SESSION['ID'])) {
                     <a href="#" class="btn btn-sm bg-teal">
                       <i class="fas fa-comments"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a href="#" class="btn btn-sm btn-primary" id="profile-link-3">
                       <i class="fas fa-user"></i> View Profile
                     </a>
                   </div>
@@ -262,19 +263,46 @@ if (isset($_SESSION['ID'])) {
 
 
 
-      <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+      <div class="modal fade" id="profile-modal-1" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="logout-modal-label">Profile</h5>
-            </div>
             <div class="modal-body text-center">
               <H1>Gwen Apuli</H1>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <a href="#" class="btn btn-primary">Yes</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <a href="#" id="Hirebtn-1" class="btn btn-primary">Hire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="profile-modal-2" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <H1>Mikha</H1>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <a href="#" id="Hirebtn-2" class="btn btn-primary">Hire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="profile-modal-3" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <H1>Aiah</H1>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <a href="#" id="Hirebtn-3" class="btn btn-primary">Hire</a>
             </div>
           </div>
         </div>
@@ -336,6 +364,7 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 
   </html>
@@ -359,14 +388,60 @@ if (isset($_SESSION['ID'])) {
 
     document.getElementById('profile-link').addEventListener('click', function (event) {
       event.preventDefault();
-      $('#profile-modal').modal('show');
+      $('#profile-modal-1').modal('show');
+    });
+
+    document.getElementById('profile-link-2').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#profile-modal-2').modal('show');
+    });
+
+    document.getElementById('profile-link-3').addEventListener('click', function (event) {
+      event.preventDefault();
+      $('#profile-modal-3').modal('show');
+    });
+
+    document.getElementById('Hirebtn-1').addEventListener('click', function (event) {
+      event.preventDefault();
+      Swal.fire({
+        title: "Thanks for choosing me 💗",
+        icon: "success"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $('#profile-modal-1').modal('hide');
+        }
+      });
+    });
+
+    document.getElementById('Hirebtn-2').addEventListener('click', function (event) {
+      event.preventDefault();
+      Swal.fire({
+        title: "Thanks for choosing me 💗",
+        icon: "success"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $('#profile-modal-2').modal('hide');
+        }
+      });
+    });
+
+    document.getElementById('Hirebtn-3').addEventListener('click', function (event) {
+      event.preventDefault();
+      Swal.fire({
+        title: "Thanks for choosing me 💗",
+        icon: "success"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $('#profile-modal-3').modal('hide');
+        }
+      });
     });
   </script>
 
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Login-form.php");
+  header("Location: Login.php");
   exit();
 }
 ?>

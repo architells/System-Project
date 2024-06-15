@@ -32,7 +32,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin's Dashboard</title>
+    <title>GYM | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -114,6 +114,20 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
+                <a href="Add_trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
+                  <p>&nbsp;&nbsp;Add Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>&nbsp;&nbsp;Trainor Profile</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="Announcement.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
@@ -134,7 +148,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -155,7 +170,8 @@ if (isset($_SESSION['ID'])) {
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-8">
-                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <canvas id="donutChart"
+                      style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   </div>
                   <div class="col-md-4">
                     <ul id="course-counts">
@@ -208,7 +224,7 @@ if (isset($_SESSION['ID'])) {
                                 WHERE Role = 'student' AND Login_Time >= '$one_day_ago'
                                 ORDER BY Last_name ASC";
                         $result = $conn->query($sql);
-                        $id = 1; 
+                        $id = 1;
                         if ($result->num_rows > 0) {
                           while ($row = $result->fetch_assoc()) {
                             $loginTime = new DateTime($row['Login_Time']);
@@ -225,7 +241,7 @@ if (isset($_SESSION['ID'])) {
                               <td style="text-align: center;"><?php echo htmlspecialchars($formattedDate); ?></td>
                             </tr>
                             <?php
-                            $id++; 
+                            $id++;
                           }
                         } else {
                           echo "<tr><td colspan='6' style='text-align: center;'> No Students found. </td></tr>";

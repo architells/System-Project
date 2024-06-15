@@ -14,7 +14,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GYM | ANNOUNCEMENT</title>
+    <title>GYM | Announcement</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="shortcut icon" href="dumbbell.png">
@@ -96,6 +96,20 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
+                <a href="Add_trainor.php" class="nav-link">
+                  <i class="bi bi-person-raised-hand"></i>
+                  <p>&nbsp;&nbsp;Add Trainor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>&nbsp;&nbsp;Trainor Profile</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="Announcement.php" class="nav-link">
                   <i class="bi bi-megaphone-fill"></i>
                   <p>&nbsp;&nbsp;Announcement</p>
@@ -107,7 +121,7 @@ if (isset($_SESSION['ID'])) {
                   <i class="bi bi-door-open"></i>
                   <p>&nbsp;&nbsp;Logout</p>
                 </a>
-                </li>
+              </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -116,7 +130,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -232,7 +247,7 @@ if (isset($_SESSION['ID'])) {
   <?php
 } else {
   // If the user is not logged in, redirect to the login page
-  header("Location: Login-form.php");
+  header("Location: Login.php");
   exit();
 }
 ?>

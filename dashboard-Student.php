@@ -8,6 +8,7 @@ if (isset($_SESSION['ID'])) {
 
   <!DOCTYPE html>
   <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
@@ -15,7 +16,8 @@ if (isset($_SESSION['ID'])) {
     <title>GYM | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -24,6 +26,7 @@ if (isset($_SESSION['ID'])) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
   </head>
+
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
       <!-- Navbar -->
@@ -68,10 +71,11 @@ if (isset($_SESSION['ID'])) {
             ?>
             <div class="image">
               <img src="<?php echo $Profile_pic; ?>" class="img-circle elevation-3" alt="User Image"
-                   style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
+                style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="profile.php" class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+              <a href="profile.php"
+                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
             </div>
           </div>
 
@@ -82,6 +86,12 @@ if (isset($_SESSION['ID'])) {
                 <a href="dashboard-Student.php" class="nav-link">
                   <i class="bi bi-speedometer2"></i>
                   <p>&nbsp;&nbsp;Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Qr_code.php" class="nav-link">
+                  <i class="bi bi-qr-code"></i>
+                  <p>&nbsp;&nbsp;Qr Code</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -117,7 +127,7 @@ if (isset($_SESSION['ID'])) {
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper"
-           style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
@@ -126,8 +136,8 @@ if (isset($_SESSION['ID'])) {
                 <div class="row align-items-center">
                   <div class="col-md-4 text-center">
                     <img class="profile-user-img img-fluid img-circle"
-                         style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
-                         src="<?php echo $Profile_pic; ?>" alt="User profile picture">
+                      style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;"
+                      src="<?php echo $Profile_pic; ?>" alt="User profile picture">
                   </div>
                   <div class="col-md-8 mt-3 d-flex flex-column">
                     <div class="card mb-3" style="position: relative;">
@@ -139,7 +149,8 @@ if (isset($_SESSION['ID'])) {
                           </div>
                           <div class="col-md-6 mb-3">
                             <label for="fullname" class="form-label">Fullname</label>
-                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></h6>
+                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                            </h6>
                           </div>
                           <div class="col-md-6 mb-3">
                             <label for="course" class="form-label">Course</label>
@@ -151,23 +162,13 @@ if (isset($_SESSION['ID'])) {
                           </div>
                         </div>
                       </div>
-                      <!-- Display QR Code -->
-                      <div style="position: absolute; top: 10px; right: 10px;">
-                        <?php
-                        $qrCodeFilePath = 'qr_codes/' . $_SESSION['qrCodeFile'];
-                        if (file_exists($qrCodeFilePath)) {
-                          echo '<img src="' . $qrCodeFilePath . '" alt="QR Code" style="height: 100px; width: 100px;">';
-                        } else {
-                          echo 'QR Code image not found';
-                        }
-                        ?>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label" aria-hidden="true">
+              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -252,6 +253,7 @@ if (isset($_SESSION['ID'])) {
       });
     </script>
   </body>
+
   </html>
 
   <?php

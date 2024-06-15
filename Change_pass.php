@@ -20,6 +20,7 @@ if (isset($_SESSION['ID'])) {
 
         $oldPass = validate($_POST['oldPass']);
         $newPass = validate($_POST['newPass']);
+        $confirm = ($_POST['confirm']);
 
 
         if (empty($oldPass)) {
@@ -27,6 +28,9 @@ if (isset($_SESSION['ID'])) {
             exit();
         } else if (empty($newPass)) {
             header("Location: profile.php?error2=New password is required");
+            exit();
+        } else if ($newpass !== $confirm) {
+            header("Location: profile.php?error2=Confirmation password is not match");
             exit();
         } else {
             // Check old password
