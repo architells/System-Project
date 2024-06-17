@@ -107,7 +107,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="Trainor-profile.php" class="nav-link">
                   <i class="bi bi-person-badge"></i>
                   <p>&nbsp;&nbsp;Trainor Profile</p>
                 </a>
@@ -238,7 +238,7 @@ if (isset($_SESSION['ID'])) {
                   <div class="card-body box-profile">
                     <div class="col-md-12 mx-auto">
                       <div class="personal-information-section">
-                        <form action="#.php" method="post" class="form-horizontal">
+                        <form action="profile-admin-be.php" method="post" class="form-horizontal">
                           <h2 class="text-center">PERSONAL INFORMATION</h2>
                           <?php if (isset($_GET['error1'])) { ?>
                             <div class="alert alert-danger">

@@ -103,7 +103,7 @@ if (isset($_SESSION['ID'])) {
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="Trainor-profile.php" class="nav-link">
                   <i class="bi bi-person-badge"></i>
                   <p>&nbsp;&nbsp;Trainor Profile</p>
                 </a>
