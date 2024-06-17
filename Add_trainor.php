@@ -28,6 +28,7 @@ if (isset($_SESSION['ID'])) {
 
     </head>
 
+
     <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
@@ -161,7 +162,7 @@ if (isset($_SESSION['ID'])) {
                 <div class="card card-primary card-outline w-50 mx-auto mt-5">
                     <div class="card-body box-profile">
                         <div class="col-md-12">
-                            <form action="#" method="POST">
+                            <form action="Add_trainor_be.php" method="POST">
                                 <!-- Display error messages -->
                                 <?php if (isset($_GET['error'])) { ?>
                                     <div class="alert alert-danger text-center">
@@ -173,22 +174,89 @@ if (isset($_SESSION['ID'])) {
                                         <?php echo htmlspecialchars($_GET['success']); ?>
                                     </div>
                                 <?php } ?>
-                                <div class="mb-3">
-                                    <label class="form-label">Trainor's name</label>
-                                    <input type="text" class="form-control" id="eventInput" aria-describedby="emailHelp"
-                                        name="event_name">
-                                </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Body Workout</label>
-                                    <input type="text" class="form-control" id="eventInput" aria-describedby="emailHelp"
-                                        name="event_name">
-                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="trainerName">Trainer's Name</label>
+                                            <input type="text" class="form-control" id="trainerName" name="trainer_name">
+                                        </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" id="exampleInputPassword1" name="description"
-                                        rows="4"></textarea>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="bodyWorkout">Body Workout</label>
+                                            <input type="text" class="form-control" id="bodyWorkout" name="body_workout">
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                <input type="text" class="form-control" id="phoneNumber"
+                                                    name="phone_number">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="birthday">Birthday</label>
+                                                <input type="date" class="form-control" id="birthday" name="birthday">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="gender">Gender</label>
+                                                <select class="form-select form-control" id="gender" name="gender">
+                                                    <option value="">Select your gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="payment">Payment</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input type="number" class="form-control" id="payment" name="payment"
+                                                        min="0">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4" style="align-items: center;">
+                                        <label class="form-label">Payment Methods</label>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="creditCard"
+                                                name="payment_methods[]" value="Credit Card">
+                                            <label class="form-check-label" for="creditCard">Credit Card</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="debitCard"
+                                                name="payment_methods[]" value="Debit Card">
+                                            <label class="form-check-label" for="debitCard">Debit Card</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="paypal"
+                                                name="payment_methods[]" value="PayPal">
+                                            <label class="form-check-label" for="paypal">PayPal</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="bankTransfer"
+                                                name="payment_methods[]" value="Bank Transfer">
+                                            <label class="form-check-label" for="bankTransfer">Bank Transfer</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="Gcash"
+                                                name="payment_methods[]" value="Gcash">
+                                            <label class="form-check-label" for="Gcash">G-Cash</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="cash"
+                                                name="payment_methods[]" value="Cash">
+                                            <label class="form-check-label" for="cash">Cash</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3 d-grid">

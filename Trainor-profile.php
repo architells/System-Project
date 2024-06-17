@@ -152,181 +152,152 @@ if (isset($_SESSION['ID'])) {
                             <table class="table table-striped projects">
                                 <thead>
                                     <tr>
-                                        <th style="width: 1%">
-                                            #
-                                        </th>
-                                        <th style="width: 20%">
-                                            Trainor's Name
-                                        </th>
-                                        <th style="width: 30%">
-                                            Profile
-                                        </th>
-                                        <th>
-                                            Project Progress
-                                        </th>
-                                        <th style="width: 8%" class="text-center">
-                                            Status
-                                        </th>
-                                        <th style="width: 20%">
-                                        </th>
+                                        <th style="width: 1%">#</th>
+                                        <th style="width: 20%">Trainor's Name</th>
+                                        <th style="width: 30%">Profile</th>
+                                        <th>Workout</th>
+                                        <th style="width: 8%" class="text-center">Status</th>
+                                        <th style="width: 20%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <a>
-                                                Gwen Apuli
-                                            </a>
-                                            <br />
-                                            <small>
-                                                Created 01.01.2019
-                                            </small>
-                                        </td>
-                                        <td>
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar.png">
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar2.png">
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar3.png">
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar4.png">
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="project_progress">
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                                </div>
-                                            </div>
-                                            <small>
-                                                57% Complete
-                                            </small>
-                                        </td>
-                                        <td class="project-state">
-                                            <span class="badge badge-success">Success</span>
-                                        </td>
-                                        <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" href="#" id="profile-1">
-                                                <i class="fas fa-folder">
-                                                </i>
-                                                View
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="#">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            <a>
-                                                Mikha
-                                            </a>
-                                            <br />
-                                            <small>
-                                                Created 01.01.2019
-                                            </small>
-                                        </td>
-                                        <td>
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar.png">
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="dist/img/avatar2.png">
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="project_progress">
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="47"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                </div>
-                                            </div>
-                                            <small>
-                                                100% Complete
-                                            </small>
-                                        </td>
-                                        <td class="project-state">
-                                            <span class="badge badge-success">Success</span>
-                                        </td>
-                                        <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" href="#" id="profile-2">
-                                                <i class="fas fa-folder">
-                                                </i>
-                                                View
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="#">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    // Include database connection
+                                    include "db_conn.php";
 
+                                    // SQL query to fetch trainers data
+                                    $sql = "SELECT * FROM trainers";
+                                    $result = $conn->query($sql);
+
+                                    // Check if there are rows returned from query
+                                    if ($result->num_rows > 0) {
+                                        // Loop through each row of data
+                                        while ($row = $result->fetch_assoc()) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $row['ID']; ?></td>
+                                                <td>
+                                                    <a><?php echo $row['Trainer_name']; ?></a><br>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td class="workout">
+
+
+                                                </td>
+                                                <td class="project-state"><span
+                                                        class="badge badge-success"><?php echo $row['Status']; ?></span></td>
+                                                <td class="project-actions text-right">
+                                                    <a class="btn btn-primary btn-sm btn-view-profile" href="#" data-toggle="modal"
+                                                        data-target="#profile-modal-<?php echo $row['ID']; ?>">
+                                                        <i class="fas fa-folder"></i> View
+                                                    </a>
+                                                    <a class="btn btn-info btn-sm btn-edit-trainer" href="#" data-toggle="modal"
+                                                        data-target="#edit-modal-<?php echo $row['ID']; ?>">
+                                                        <i class="fas fa-pencil-alt"></i> Edit
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm btn-delete-trainer" href="#" data-toggle="modal"
+                                                        data-target="#delete-modal-<?php echo $row['ID']; ?>">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        } // End of while loop
+                                    } else {
+                                        // No trainers found
+                                        echo '<tr><td colspan="6">No trainers found</td></tr>';
+                                    }
+
+                                    // Close database connection
+                                    $conn->close();
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
 
-                        <div class="modal fade" id="profile-modal-1" tabindex="-1" role="dialog"
-                            aria-labelledby="profile-modal-label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="logout-modal-label">Profile</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        test-1
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                        <a href="#" class="btn btn-primary">Yes</a>
+                        <?php
+                        // Render modals for each trainer profile
+                        if ($result->num_rows > 0) {
+                            $result->data_seek(0); // Reset result pointer
+                            while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <!-- View Modal -->
+                                <div class="modal fade" id="profile-modal-<?php echo htmlspecialchars($row['ID']); ?>" tabindex="-1"
+                                    role="dialog" aria-labelledby="profile-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="profile-modal-label">Profile</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Profile modal content -->
+                                                <p>Profile content for <?php echo htmlspecialchars($row['Trainer_name']); ?></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <!-- Example action button -->
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="modal fade" id="profile-modal-2" tabindex="-1" role="dialog"
-                            aria-labelledby="profile-modal-label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="logout-modal-label">Profile</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        test-2
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                        <a href="#" class="btn btn-primary">Yes</a>
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="edit-modal-<?php echo htmlspecialchars($row['ID']); ?>" tabindex="-1"
+                                    role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="edit-modal-label">Edit Trainer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Edit form content -->
+                                                <p>Edit form for <?php echo htmlspecialchars($row['Trainer_name']); ?></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="delete-modal-<?php echo htmlspecialchars($row['ID']); ?>" tabindex="-1"
+                                    role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete-modal-label">Delete Trainer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Delete confirmation content -->
+                                                <p>Are you sure you want to delete
+                                                    <?php echo htmlspecialchars($row['Trainer_name']); ?>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
+
 
                     </div>
                     <!-- /.card -->
@@ -380,21 +351,51 @@ if (isset($_SESSION['ID'])) {
     </body>
 
     <script>
-        document.getElementById('logout-link').addEventListener('click', function (event) {
-            event.preventDefault();
-            $('#logout-modal').modal('show');
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if #logout-link exists before adding event listener
+            if (document.getElementById('logout-link')) {
+                document.getElementById('logout-link').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    $('#logout-modal').modal('show');
+                });
+            }
 
-        document.getElementById('profile-1').addEventListener('click', function (event) {
-            event.preventDefault();
-            $('#profile-modal-1').modal('show');
-        });
+            // Add event listeners for profile view buttons
+            var profileButtons = document.querySelectorAll('.btn-view-profile');
+            profileButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var targetModalId = this.getAttribute('data-target');
+                    $(targetModalId).modal('show');
+                });
+            });
 
-        document.getElementById('profile-2').addEventListener('click', function (event) {
-            event.preventDefault();
-            $('#profile-modal-2').modal('show');
-        })
+            // Add event listeners for edit trainer buttons
+            var editButtons = document.querySelectorAll('.btn-edit-trainer');
+            editButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var targetModalId = this.getAttribute('data-target');
+                    // Perform edit action or show edit modal
+                    // Example: $(targetModalId).modal('show');
+                    console.log('Edit button clicked');
+                });
+            });
+
+            // Add event listeners for delete trainer buttons
+            var deleteButtons = document.querySelectorAll('.btn-delete-trainer');
+            deleteButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var targetModalId = this.getAttribute('data-target');
+                    // Perform delete action or show delete confirmation modal
+                    // Example: $(targetModalId).modal('show');
+                    console.log('Delete button clicked');
+                });
+            });
+        });
     </script>
+
 
     </html>
 
