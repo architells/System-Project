@@ -1,0 +1,69 @@
+.section-2{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.section-3{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.counter {
+    padding: 0px 50px 20px 50px;
+
+}
+
+.counter-2{
+    padding: 0px 50px 20px 50px;
+}
+
+.counter {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.counter h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.counter p {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+
+
