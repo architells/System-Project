@@ -22,11 +22,11 @@ if (isset($_POST['otp'])) {
     if ($result->num_rows > 0) {
         // OTP found
         $row = $result->fetch_assoc();
-        $email = $row['Email'];
+        $ID = $row['ID'];
 
         // Prepare and execute SQL query to get ID from the students table using the retrieved Email
-        $stmt = $conn->prepare("SELECT ID FROM students WHERE Email = ?");
-        $stmt->bind_param("s", $email);
+        $stmt = $conn->prepare("SELECT Email FROM users WHERE ID = ?");
+        $stmt->bind_param("i", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 

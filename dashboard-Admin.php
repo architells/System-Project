@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 
   include "db_conn.php"; // Include database connection here
 
@@ -12,7 +12,7 @@ if (isset($_SESSION['ID'])) {
   $count_data = [];
   $one_day_ago = date('Y-m-d H:i:s', strtotime('-1 day'));
   $course_sql = "SELECT Course, COUNT(*) as course_count 
-               FROM students 
+               FROM users 
                WHERE Role = 'student' AND Login_Time >= '$one_day_ago' 
                GROUP BY Course";
   $course_result = $conn->query($course_sql);
@@ -22,6 +22,17 @@ if (isset($_SESSION['ID'])) {
       $courses[] = $row['Course'];
       $count_data[] = $row['course_count'];
     }
+  }
+
+  // Fetch total number of students logged in the last day
+  $total_students_sql = "SELECT COUNT(*) as total_students 
+   FROM users 
+   WHERE Role = 'student' AND Login_Time >= '$one_day_ago'";
+  $total_students_result = $conn->query($total_students_sql);
+  $total_students = 0;
+  if ($total_students_result->num_rows > 0) {
+    $total_students_row = $total_students_result->fetch_assoc();
+    $total_students = $total_students_row['total_students'];
   }
   ?>
 
@@ -57,6 +68,9 @@ if (isset($_SESSION['ID'])) {
 -->
 
   <body class="hold-transition sidebar-mini">
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dumbbell.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
     <div class="wrapper">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -116,14 +130,14 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Add_trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Add Trainor</p>
+                  <p>&nbsp;&nbsp;Add Trainer</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor-profile.php" class="nav-link">
                   <i class="bi bi-person-badge"></i>
-                  <p>&nbsp;&nbsp;Trainor Profile</p>
+                  <p>&nbsp;&nbsp;Trainer Profile</p>
                 </a>
               </li>
 
@@ -220,7 +234,7 @@ if (isset($_SESSION['ID'])) {
                         include "db_conn.php";
                         $one_day_ago = date('Y-m-d H:i:s', strtotime('-1 day'));
                         $sql = "SELECT Student_ID, First_name, Middle_name, Last_name, Email, Login_Time, Course, Year_level 
-                                FROM students 
+                                FROM users 
                                 WHERE Role = 'student' AND Login_Time >= '$one_day_ago'
                                 ORDER BY Last_name ASC";
                         $result = $conn->query($sql);
@@ -257,75 +271,57 @@ if (isset($_SESSION['ID'])) {
             </div>
           </div><!-- /.container-fluid -->
 
-          <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
+          <!-- /.content-header -->
+
+          <!-- Main content -->
+          <div class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="card">
+                  </div>
                 </div>
-                <div class="modal-body">
-                  Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  <a href="Logout-admin.php" class="btn btn-primary">Yes</a>
-                </div>
+
               </div>
+              <!-- /.container-fluid -->
             </div>
+            <!-- /.content -->
           </div>
-        </div>
+          <!-- /.content-wrapper -->
 
-        <!-- /.content-header -->
+          <!-- Control Sidebar -->
+          <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+          </aside>
+          <!-- /.control-sidebar -->
 
-        <!-- Main content -->
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="card">
-                </div>
-              </div>
-
-            </div>
-            <!-- /.container-fluid -->
-          </div>
-          <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-          <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-
-        <!-- Main Footer -->
-        <!-- <footer class="main-footer">
+          <!-- Main Footer -->
+          <!-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
   </footer> -->
-      </div>
-      <!-- ./wrapper -->
+        </div>
+        <!-- ./wrapper -->
 
-      <!-- REQUIRED SCRIPTS -->
+        <!-- REQUIRED SCRIPTS -->
 
-      <!-- jQuery -->
-      <script src="plugins/jquery/jquery.min.js"></script>
-      <!-- Bootstrap -->
-      <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <!-- AdminLTE -->
-      <script src="dist/js/adminlte.js"></script>
+        <!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE -->
+        <script src="dist/js/adminlte.js"></script>
 
-      <!-- OPTIONAL SCRIPTS -->
-      <script src="plugins/chart.js/Chart.min.js"></script>
-      <!-- AdminLTE for demo purposes -->
-      <script src="dist/js/demo.js"></script>
-      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-      <script src="dist/js/pages/dashboard3.js"></script>
+        <!-- OPTIONAL SCRIPTS -->
+        <script src="plugins/chart.js/Chart.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="dist/js/pages/dashboard3.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
   <script>
     $(function () {
@@ -347,6 +343,7 @@ if (isset($_SESSION['ID'])) {
         data: donutData,
         options: donutOptions
       })
+      
 
       // Populate course counts
       var courseCounts = <?php echo json_encode(array_combine($courses, $count_data)); ?>;
@@ -354,10 +351,6 @@ if (isset($_SESSION['ID'])) {
       for (var course in courseCounts) {
         courseCountsList.append('<li>' + course + ' - ' + courseCounts[course] + '</li>');
       }
-    })
-    document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
     });
   </script>
 
@@ -388,6 +381,23 @@ if (isset($_SESSION['ID'])) {
           row.style.display = '';
         }
       });
+    });
+
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default action
+      Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the logout page
+          window.location.href = 'logout-admin.php';
+        }
+      })
     });
   </script>
 

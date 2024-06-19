@@ -41,7 +41,7 @@ if (isset($_SESSION['ID'])) {
                 exit();
             }
             // Retrieve the hashed password from the database
-            $sql = "SELECT Password FROM students WHERE ID = ?";
+            $sql = "SELECT Password FROM users WHERE ID = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $ID);
             $stmt->execute();

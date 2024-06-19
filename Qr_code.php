@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
 
   ?>
 
@@ -55,7 +55,7 @@ if (isset($_SESSION['ID'])) {
         <!-- Brand Logo -->
         <a href="dashboard-Admin.php" class="brand-link">
           <img src="dumbbell.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">Admin</span>
+          <span class="brand-text font-weight-light">STUDENT</span>
         </a>
 
         <!-- Sidebar -->
@@ -75,7 +75,7 @@ if (isset($_SESSION['ID'])) {
             </div>
             <div class="info">
               <a href="profile-admin.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+                class="d-block"><?php echo $_SESSION['fname']; ?></a>
             </div>
           </div>
 
@@ -116,12 +116,6 @@ if (isset($_SESSION['ID'])) {
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-envelope-check"></i>
-                  <p>&nbsp;&nbsp;Verify Email</p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a id="logout-link" class="nav-link">
@@ -226,14 +220,28 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 
   </html>
 
   <script>
+    // Event listener for logout confirmation
     document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
+      event.preventDefault(); // Prevent the default action
+      Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the logout page
+          window.location.href = 'logout-student.php';
+        }
+      });
     });
   </script>
 

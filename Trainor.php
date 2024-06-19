@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
 
   ?>
 
@@ -41,8 +41,6 @@ if (isset($_SESSION['ID'])) {
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Navbar Search -->
-
-
         </ul>
       </nav>
       <!-- /.navbar -->
@@ -71,13 +69,11 @@ if (isset($_SESSION['ID'])) {
                 style="height: 2.3rem; width: 2.3rem; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="info">
-              <a href="profile.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+              <a href="profile.php" class="d-block"><?php echo $_SESSION['fname']; ?></a>
             </div>
           </div>
 
           <!-- SidebarSearch Form -->
-
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
@@ -109,16 +105,10 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Trainor</p>
+                  <p>&nbsp;&nbsp;Trainer</p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-envelope-check"></i>
-                  <p>&nbsp;&nbsp;Verify Email</p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a id="logout-link" class="nav-link">
@@ -141,7 +131,7 @@ if (isset($_SESSION['ID'])) {
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 style="color: white;">Trainor</h1>
+                <h1 style="color: white;">Trainer</h1>
               </div>
               <div class="col-sm-6">
               </div>
@@ -152,207 +142,129 @@ if (isset($_SESSION['ID'])) {
         <!-- Main content -->
         <section class="content">
 
+          <?php
+          // Include database connection
+          include "db_conn.php";
+
+          // Query to retrieve trainer details
+          $sql = "SELECT * FROM trainers WHERE Status = 'Available'";
+          $result = $conn->query($sql);
+          ?>
+
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light d-flex flex-fill">
-                <div class="card-header text-muted border-bottom-0">
-                  Full Body Workout
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>Gwen Apuli</b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
-                          Puso mo</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
-                      </ul>
+            <?php
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                ?>
+                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                  <div class="card bg-light d-flex flex-fill">
+                    <div class="card-header text-muted border-bottom-0">
+                      <?php echo htmlspecialchars($row['Body_Workout']); ?>
                     </div>
-                    <div class="col-5 text-center">
-                      <img src="BINI GWEN.jpg" alt="user-avatar" class="img-circle img-fluid"
-                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    <div class="card-body pt-0">
+                      <div class="row">
+                        <div class="col-7">
+                          <h2 class="lead"><b><?php echo htmlspecialchars($row['Trainer_name']); ?></b></h2>
+                          <ul class="ml-4 mb-0 fa-ul text-muted">
+                            <li class="small"><span class="fa-li"><i
+                                  class="fas fa-lg fa-phone"></i></span><?php echo htmlspecialchars($row['Phone_number']); ?>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                          <img src="Trainor_pic/<?php echo htmlspecialchars($row['Profile_picture']); ?>" alt="user-avatar"
+                            class="img-circle img-fluid"
+                            style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <div class="text-right">
+                        <a href="#" class="btn btn-sm bg-teal">
+                          <i class="fas fa-comments"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-primary"
+                          id="profile-link-<?php echo htmlspecialchars($row['index']); ?>">
+                          <i class="fas fa-user"></i> View Profile
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-teal">
-                      <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary" id="profile-link">
-                      <i class="fas fa-user"></i> View Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light d-flex flex-fill">
-                <div class="card-header text-muted border-bottom-0">
-                  Biceps Workout
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>Mikha Lim</b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
-                          Puso mo</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
-                      </ul>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="BINI Mikha.jpg" alt="user-avatar" class="img-circle img-fluid"
-                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-teal">
-                      <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary" id="profile-link-2">
-                      <i class="fas fa-user"></i> View Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+                <!-- Modal for each trainer -->
+                <div class="modal fade" id="profile-modal-<?php echo htmlspecialchars($row['index']); ?>" tabindex="-1"
+                  role="dialog" aria-labelledby="profile-modal-label-<?php echo htmlspecialchars($row['index']); ?>"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="profile-modal-label-<?php echo htmlspecialchars($row['index']); ?>">
+                          <?php echo htmlspecialchars($row['Trainer_name']); ?>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <!-- Modal Body -->
+                      <div class="modal-body text-center">
+                        <!-- Add any additional details you want to display in the modal body -->
+                        <strong>Sessions: </strong>
+                        <p>2 sessions per day</p>
 
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light d-flex flex-fill">
-                <div class="card-header text-muted border-bottom-0">
-                  Leg Workout
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>Aiah Mama Mary</b></h2>
-                      <p class="text-muted text-sm"><b>About: </b> Main dancer / Lead Vocal / Model</p>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa
-                          Puso mo</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 143</li>
-                      </ul>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="BINI AIAH♥.jpg" alt="user-avatar" class="img-circle img-fluid"
-                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                        <strong>Time: </strong>
+                        <p>10:00 - 12:00</p>
+
+                        <strong>Quote: </strong>
+                        <p>Stronger Makes Me Pain</p>
+                      </div>
+                      <!-- Modal Footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a href="Hire-trainor-be.php" id="Hirebtn-<?php echo htmlspecialchars($row['index']); ?>"
+                          class="btn btn-primary">Hire</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-teal">
-                      <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary" id="profile-link-3">
-                      <i class="fas fa-user"></i> View Profile
-                    </a>
+
+
+                <?php
+              }
+            } else {
+              ?>
+              <!-- No trainers found -->
+              <div class="col-12">
+                <div class="card bg-light">
+                  <div class="card-body text-center">
+                    <h3 class="card-title">No trainers found</h3>
+                    <p class="card-text">Unfortunately, there are no trainers available at the moment.</p>
                   </div>
                 </div>
               </div>
-            </div>
+              <?php
+            }
+            ?>
           </div>
+
+        </section>
+        <!-- /.content -->
       </div>
+      <!-- /.content-wrapper -->
 
-
-
-
-      <div class="modal fade" id="profile-modal-1" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center">
-              <H1>Gwen Apuli</H1>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <a href="#" id="Hirebtn-1" class="btn btn-primary">Hire</a>
-            </div>
-          </div>
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.2.0
         </div>
-      </div>
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+      </footer>
 
-      <div class="modal fade" id="profile-modal-2" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center">
-              <H1>Mikha</H1>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <a href="#" id="Hirebtn-2" class="btn btn-primary">Hire</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="profile-modal-3" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center">
-              <H1>Aiah</H1>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <a href="#" id="Hirebtn-3" class="btn btn-primary">Hire</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <!-- /.card-body -->
-      <div class="card-footer">
-        .
-
-        <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-              </div>
-              <div class="modal-body">
-                Are you sure you want to logout?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <a href="Logout-students.php" class="btn btn-primary">Yes</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.card-footer-->
-    </div>
-    <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.2.0
-      </div>
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -370,11 +282,6 @@ if (isset($_SESSION['ID'])) {
   </html>
 
   <script>
-    document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
       const navlinks = document.querySelectorAll('.nav-link');
 
@@ -386,53 +293,60 @@ if (isset($_SESSION['ID'])) {
       });
     });
 
-    document.getElementById('profile-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#profile-modal-1').modal('show');
-    });
+    function handleProfileAndHire(trainerId) {
+      $('#profile-modal-' + trainerId).modal('show');
 
-    document.getElementById('profile-link-2').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#profile-modal-2').modal('show');
-    });
+      $('#Hirebtn-' + trainerId).off('click').on('click', function (event) {
+        event.preventDefault();
+        Swal.fire({
+          title: "This transcation is not refundable",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: 'Confirm'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Perform an AJAX request to send the index to the server-side script
+            $.ajax({
+              type: "POST",
+              url: "Hire-trainor-be.php",
+              data: { index: trainerId },
+              success: function (response) {
+                Swal.fire("Success", response, "success");
+                $('#profile-modal-' + trainerId).modal('hide');
+              },
+              error: function (xhr, status, error) {
+                Swal.fire("Error", "There was an error hiring the trainer.", "error");
+              }
+            });
+          }
+        });
+      });
+    }
 
-    document.getElementById('profile-link-3').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#profile-modal-3').modal('show');
-    });
 
-    document.getElementById('Hirebtn-1').addEventListener('click', function (event) {
-      event.preventDefault();
-      Swal.fire({
-        title: "Thanks for choosing me 💗",
-        icon: "success"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $('#profile-modal-1').modal('hide');
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('[id^="profile-link-"]').forEach(item => {
+        item.addEventListener('click', function (event) {
+          event.preventDefault();
+          const trainerId = this.id.split('-')[2]; // Extract trainer ID from ID attribute
+          handleProfileAndHire(trainerId);
+        });
       });
     });
 
-    document.getElementById('Hirebtn-2').addEventListener('click', function (event) {
-      event.preventDefault();
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default action
       Swal.fire({
-        title: "Thanks for choosing me 💗",
-        icon: "success"
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
       }).then((result) => {
         if (result.isConfirmed) {
-          $('#profile-modal-2').modal('hide');
-        }
-      });
-    });
-
-    document.getElementById('Hirebtn-3').addEventListener('click', function (event) {
-      event.preventDefault();
-      Swal.fire({
-        title: "Thanks for choosing me 💗",
-        icon: "success"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $('#profile-modal-3').modal('hide');
+          // Redirect to the logout page
+          window.location.href = 'logout-students.php';
         }
       });
     });
@@ -444,4 +358,3 @@ if (isset($_SESSION['ID'])) {
   header("Location: Login.php");
   exit();
 }
-?>

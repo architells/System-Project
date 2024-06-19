@@ -31,7 +31,7 @@ if (
 
 
 
-    $user_ifo = "Pnum=" . $Pnum . "&month=" . $month . "&day=" . $day . "&year=" . $year . "&gender=" . $gender .
+    $user_ifo = "Pnum=" . $Pnum . "&birthday=" . $birthday . "&gender=" . $gender .
         "&province=" . $province . "&city=" . $city . "&barangay=" . $barangay . "&zip_code=" . $zip_code;
 
     if (empty($Pnum)) {
@@ -64,27 +64,27 @@ if (
     } else {
 
 
-        $ID = $_SESSION['ID'];
+        $Student_ID = $_SESSION['Student_ID'];
 
         // Fetch user information
-        $sql = "SELECT * FROM students WHERE ID=?";
+        $sql = "SELECT * FROM users WHERE Student_ID=?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $ID);
+        mysqli_stmt_bind_param($stmt, "s", $Student_ID);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         // Fetch user profile information
-        $sql3 = "SELECT * FROM admin_profile WHERE ID=?";
+        $sql3 = "SELECT * FROM admin_profile WHERE Student_ID=?";
         $stmt3 = mysqli_prepare($conn, $sql3);
-        mysqli_stmt_bind_param($stmt3, "s", $ID);
+        mysqli_stmt_bind_param($stmt3, "s", $Student_ID);
         mysqli_stmt_execute($stmt3);
         $result3 = mysqli_stmt_get_result($stmt3);
 
         // Check if user profile exists, if not, insert a new record
         if (mysqli_num_rows($result3) == 0) {
-            $sql4 = "INSERT INTO admin_profile (ID) VALUES (?)";
+            $sql4 = "INSERT INTO admin_profile (Student_ID) VALUES (?)";
             $stmt4 = mysqli_prepare($conn, $sql4);
-            mysqli_stmt_bind_param($stmt4, "s", $ID);
+            mysqli_stmt_bind_param($stmt4, "s", $Student_ID);
             mysqli_stmt_execute($stmt4);
             if (mysqli_stmt_affected_rows($stmt4) < 1) {
                 // Handle insertion failure
@@ -106,10 +106,10 @@ if (
                 `city` = ?,
                 `barangay` = ?,
                 `zip_code` = ? 
-                WHERE ID = ?";
+                WHERE Student_ID = ?";
 
             $stmt2 = mysqli_prepare($conn, $sql2);
-            mysqli_stmt_bind_param($stmt2, "ssssssss", $Pnum, $birthday, $gender, $province, $city, $barangay, $zip_code, $ID);
+            mysqli_stmt_bind_param($stmt2, "ssssssss", $Pnum, $birthday, $gender, $province, $city, $barangay, $zip_code, $Student_ID);
             $result2 = mysqli_stmt_execute($stmt2);
 
 

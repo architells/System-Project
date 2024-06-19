@@ -88,7 +88,7 @@
 
               <div class="input-group mb-3">
                 <input type="text" name="s_ID" class="form-control" placeholder="ID number"
-                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                  value="<?php echo $_GET['s_ID'] ?? ''; ?>">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="bi bi-person-vcard-fill"></span>
@@ -97,7 +97,7 @@
               </div>
               <div class="input-group mb-3">
                 <input type="text" name="course" class="form-control" placeholder="Course"
-                  value="<?php echo $_GET['uname'] ?? ''; ?>">
+                  value="<?php echo $_GET['course'] ?? ''; ?>">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="bi bi-book"></span>
@@ -105,7 +105,7 @@
                 </div>
               </div>
               <div class="input-group mb-3">
-                <select name="year_level" class="form-control">
+                <select name="year_level" class="form-control" value="<?php echo $_GET['year_level'] ?? ''; ?>">
                   <option value="" selected>Select Year Level</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="input-group mb-3">
-                <select id="role" name="role" class="form-control">
+                <select id="role" name="role" class="form-control" value="<?php echo $_GET['role'] ?? ''; ?>">
                   <option value="" selected>Select Role</option>
                   <option value="student">Student</option>
                   <option value="admin">Admin</option>
@@ -172,10 +172,6 @@
               </div>
             </form>
             <div class="social-auth-links text-center">
-              <a href="#" class="btn btn-block btn-primary">
-                <i class="fab fa-facebook mr-2"></i>
-                Sign up using Facebook
-              </a>
               <a href="#" class="btn btn-block btn-danger">
                 <i class="fab fa-google-plus mr-2"></i>
                 Sign up using Google+

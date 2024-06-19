@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 
   ?>
 
@@ -14,7 +14,7 @@ if (isset($_SESSION['ID'])) {
     <meta charset="utf-8">
     <link rel="shortcut icon" href="dumbbell.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GYM | ADMIN PROFILE</title>
+    <title>GYM | Admin Profile</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -102,14 +102,14 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Add_trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Add Trainor</p>
+                  <p>&nbsp;&nbsp;Add Trainer</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="Trainor-profile.php" class="nav-link">
                   <i class="bi bi-person-badge"></i>
-                  <p>&nbsp;&nbsp;Trainor Profile</p>
+                  <p>&nbsp;&nbsp;Trainer Profile</p>
                 </a>
               </li>
 
@@ -402,23 +402,6 @@ if (isset($_SESSION['ID'])) {
           <!-- /.row -->
       </div><!-- /.container-fluid -->
       </section>
-      <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to logout?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <a href="Logout-students.php" class="btn btn-primary">Yes</a>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -445,14 +428,27 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 
   </html>
 
   <script>
     document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
+      event.preventDefault(); // Prevent the default action
+      Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the logout page
+          window.location.href = 'logout-admin.php';
+        }
+      })
     });
   </script>
 

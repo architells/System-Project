@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
 
   ?>
 
@@ -81,7 +81,7 @@ if (isset($_SESSION['ID'])) {
 
             <div class="info">
               <a href="profile.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+                class="d-block"><?php echo $_SESSION['fname']; ?></a>
             </div>
           </div>
 
@@ -116,16 +116,10 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Trainor</p>
+                  <p>&nbsp;&nbsp;Trainer</p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-envelope-check"></i>
-                  <p>&nbsp;&nbsp;Verify Email</p>
-                </a>
-              </li>
 
               <li class="nav-item">
                 <a id="logout-link" class="nav-link">
@@ -168,10 +162,8 @@ if (isset($_SESSION['ID'])) {
                     </div>
 
                     <h3 class="profile-username text-center">
-                      <?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                      <?php echo $_SESSION['uname']; ?>
                     </h3>
-
-                    <!-- <p class="text-muted text-center"><?php echo $_SESSION['Education']; ?></p> -->
 
                     <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
@@ -257,6 +249,14 @@ if (isset($_SESSION['ID'])) {
                               <?php echo $_GET['success1']; ?>
                             </div>
                           <?php } ?>
+                          <!-- Username -->
+                          <div class="form-group row">
+                            <label for="inputphonenumber" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="uname" id="inputphonenumber"
+                                placeholder="Username" value="<?php echo $_GET['uname'] ?? ''; ?>">
+                            </div>
+                          </div>
                           <!-- Phone Number -->
                           <div class="form-group row">
                             <label for="inputphonenumber" class="col-sm-2 col-form-label">Phone Number</label>
@@ -418,24 +418,6 @@ if (isset($_SESSION['ID'])) {
       </div><!-- /.container-fluid -->
       </section>
 
-      <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to logout?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <a href="Logout-students.php" class="btn btn-primary">Yes</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -462,6 +444,7 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 
   </html>
@@ -487,6 +470,23 @@ if (isset($_SESSION['ID'])) {
           this.classList.add('active');
         });
       });
+    });
+
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default action
+      Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the logout page
+          window.location.href = 'logout-students.php';
+        }
+      })
     });
   </script>
 

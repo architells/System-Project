@@ -57,7 +57,7 @@ if (isset($_POST['email'])) {
     $otp = rand(100000, 999999);
 
     // Check if email exists in the students table and get the ID
-    $stmt = $conn->prepare("SELECT ID, Email FROM students WHERE Email=?");
+    $stmt = $conn->prepare("SELECT ID, Email FROM users WHERE Email=?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

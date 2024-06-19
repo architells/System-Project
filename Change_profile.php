@@ -3,7 +3,7 @@ session_start();
 include "db_conn.php";  // Include database connection file
 
 if(isset($_POST['upload'])){
-    $ID = $_SESSION['ID'];
+    $Student_ID = $_SESSION['Student_ID'];
 
     $allowed_types = array('image/jpeg', 'image/png', 'image/gif');
 
@@ -21,9 +21,9 @@ if(isset($_POST['upload'])){
     $folder = "upload/";
 
     // Fetch user information
-    $sql = "SELECT * FROM students WHERE ID=?";
+    $sql = "SELECT * FROM users WHERE Student_ID=?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $ID);
+    mysqli_stmt_bind_param($stmt, "s", $Student_ID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -32,26 +32,26 @@ if(isset($_POST['upload'])){
         $row = mysqli_fetch_assoc($result);
 
         // Check if user profile exists, if not, insert a new record
-        $sql3 = "SELECT * FROM student_profile WHERE ID=?";
+        $sql3 = "SELECT * FROM student_profile WHERE Student_ID=?";
         $stmt3 = mysqli_prepare($conn, $sql3);
-        mysqli_stmt_bind_param($stmt3, "s", $ID);
+        mysqli_stmt_bind_param($stmt3, "s", $Student_ID);
         mysqli_stmt_execute($stmt3);
         $result3 = mysqli_stmt_get_result($stmt3);
 
         if(mysqli_num_rows($result3) == 0) {
-            $sql4 = "INSERT INTO student_profile (ID) VALUES (?)";
+            $sql4 = "INSERT INTO student_profile (Student_ID) VALUES (?)";
             $stmt4 = mysqli_prepare($conn, $sql4);
-            mysqli_stmt_bind_param($stmt4, "s", $ID);
+            mysqli_stmt_bind_param($stmt4, "s", $Student_ID);
             mysqli_stmt_execute($stmt4);
             mysqli_stmt_close($stmt4); // Close the statement
         }
-
+        
         // Combine filename and file type
         $file_name_and_type = $file . '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
         // Move the uploaded file to user's profile
         if(move_uploaded_file($file_loc, $folder.$file_name_and_type)){
-            $sql5 = "UPDATE student_profile SET Profile_picture=? WHERE ID=?";
+            $sql5 = "UPDATE student_profile SET Profile_picture=? WHERE Student_ID=?";
             $stmt5 = mysqli_prepare($conn, $sql5);
             mysqli_stmt_bind_param($stmt5, "ss", $file_name_and_type, $ID);
             mysqli_stmt_execute($stmt5);

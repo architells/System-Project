@@ -2,13 +2,13 @@
 session_start();
 include "db_conn.php";
 
-if (isset($_SESSION['ID'])) {
-    $ID = $_SESSION['ID'];
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
+    $Student_ID = $_SESSION['Student_ID'];
 
     // Update the student's status to Offline
-    $sql = "UPDATE students SET Status = 'Offline' WHERE ID = ?";
+    $sql = "UPDATE users SET Status = 'Offline' WHERE Student_ID = ?";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("i", $ID); // Use 'i' for integer type
+        $stmt->bind_param("i", $Student_ID); // Use 'i' for integer type
         if ($stmt->execute()) {
             // Successfully updated the status
             session_unset();

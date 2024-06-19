@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
 
   ?>
 
@@ -72,7 +72,7 @@ if (isset($_SESSION['ID'])) {
             </div>
             <div class="info">
               <a href="profile.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+                class="d-block"><?php echo $_SESSION['fname']; ?></a>
             </div>
           </div>
 
@@ -109,14 +109,7 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Trainor</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-envelope-check"></i>
-                  <p>&nbsp;&nbsp;Verify Email</p>
+                  <p>&nbsp;&nbsp;Trainer</p>
                 </a>
               </li>
 
@@ -134,7 +127,8 @@ if (isset($_SESSION['ID'])) {
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
+      <div class="content-wrapper"
+        style="background: url('GYM-IMG-4.jpg') no-repeat center center fixed; background-size: cover;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -213,29 +207,6 @@ if (isset($_SESSION['ID'])) {
           ?>
         </section>
 
-        <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-              </div>
-              <div class="modal-body">
-                Are you sure you want to logout?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <a href="Logout-students.php" class="btn btn-primary">Yes</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
@@ -263,26 +234,39 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 
   </html>
 
   <script>
-    document.getElementById('logout-link').addEventListener('click', function (event) {
-      event.preventDefault();
-      $('#logout-modal').modal('show');
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
-        const navlinks = document.querySelectorAll('.nav-link');
+      const navlinks = document.querySelectorAll('.nav-link');
 
-        navlinks.forEach(link => {
-          link.addEventListener('click', function () {
-            navlinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-          });
+      navlinks.forEach(link => {
+        link.addEventListener('click', function () {
+          navlinks.forEach(nav => nav.classList.remove('active'));
+          this.classList.add('active');
         });
       });
+    });
+
+    document.getElementById('logout-link').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default action
+      Swal.fire({
+        title: 'Are you sure you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the logout page
+          window.location.href = 'logout-students.php';
+        }
+      })
+    });
   </script>
 
   <?php

@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['ID'])) {
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
   ?>
 
   <!DOCTYPE html>
@@ -28,6 +28,9 @@ if (isset($_SESSION['ID'])) {
   </head>
 
   <body class="hold-transition sidebar-mini">
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dumbbell.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
     <div class="wrapper">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -75,7 +78,7 @@ if (isset($_SESSION['ID'])) {
             </div>
             <div class="info">
               <a href="profile.php"
-                class="d-block"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?></a>
+                class="d-block"><?php echo $_SESSION['fname']; ?></a>
             </div>
           </div>
 
@@ -103,15 +106,10 @@ if (isset($_SESSION['ID'])) {
               <li class="nav-item">
                 <a href="Trainor.php" class="nav-link">
                   <i class="bi bi-person-raised-hand"></i>
-                  <p>&nbsp;&nbsp;Trainor</p>
+                  <p>&nbsp;&nbsp;Trainer</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="bi bi-envelope-check"></i>
-                  <p>&nbsp;&nbsp;Verify Email</p>
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a id="logout-link" class="nav-link">
                   <i class="bi bi-door-open"></i>
@@ -149,7 +147,8 @@ if (isset($_SESSION['ID'])) {
                           </div>
                           <div class="col-md-6 mb-3">
                             <label for="fullname" class="form-label">Fullname</label>
-                            <h6><?php echo $_SESSION['fname'] . ' ' . $_SESSION['mname'] . ' ' . $_SESSION['lname']; ?>
+                            <h6>
+                              <?php echo $_SESSION['lname'] . ', ' . $_SESSION['fname'] . ' ' . $_SESSION['mname'] . '.'; ?>
                             </h6>
                           </div>
                           <div class="col-md-6 mb-3">
@@ -162,24 +161,6 @@ if (isset($_SESSION['ID'])) {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modal-label"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="logout-modal-label">Logout Confirmation</h5>
-                    </div>
-                    <div class="modal-body">
-                      Are you sure you want to logout?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                      <a href="Logout-students.php" class="btn btn-primary">Yes</a>
                     </div>
                   </div>
                 </div>
@@ -234,13 +215,9 @@ if (isset($_SESSION['ID'])) {
     <script src="dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-      document.getElementById('logout-link').addEventListener('click', function (event) {
-        event.preventDefault();
-        $('#logout-modal').modal('show');
-      });
-
       document.addEventListener('DOMContentLoaded', function () {
         const navlinks = document.querySelectorAll('.nav-link');
 
@@ -250,6 +227,23 @@ if (isset($_SESSION['ID'])) {
             this.classList.add('active');
           });
         });
+      });
+
+      document.getElementById('logout-link').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default action
+        Swal.fire({
+          title: 'Are you sure you want to logout?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, logout'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Redirect to the logout page
+            window.location.href = 'logout-students.php';
+          }
+        })
       });
     </script>
   </body>

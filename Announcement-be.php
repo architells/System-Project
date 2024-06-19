@@ -2,9 +2,10 @@
 session_start();
 include "db_conn.php";
 
-if (isset($_POST['event_name']) && isset($_POST['description'])) {
+if (isset($_POST['event_name'], $_POST['description'])) {
 
-    function validate($data) {
+    function validate($data)
+    {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
@@ -17,27 +18,24 @@ if (isset($_POST['event_name']) && isset($_POST['description'])) {
     if (empty($event)) {
         header("Location: Announcement.php?error=Event name is empty");
         exit();
-    } else if (empty($description)) {
-        header("Location: Announcement.php?error=Please put description");
+    } elseif (empty($description)) {
+        header("Location: Announcement.php?error=Description is empty");
         exit();
     } else {
-        $ID = $_SESSION['ID'];
+        $Student_ID = $_SESSION['Student_ID'];
 
         // Check if the user is an admin
-        $sql = "SELECT * FROM students WHERE ID = ? AND Role = 'admin'";
+        $sql = "SELECT * FROM users WHERE Student_ID = ? AND Role = 'admin'";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "i", $ID);
+        mysqli_stmt_bind_param($stmt, "s", $Student_ID); // 's' for string type
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-
-            // Insert or update announcement
-            $sql2 = "INSERT INTO announcement (ID, event_name, description) VALUES (?, ?, ?)
-                     ON DUPLICATE KEY UPDATE event_name = VALUES(event_name), description = VALUES(description)";
+            // Insert announcement
+            $sql2 = "INSERT INTO announcement (student_id, event_name, description) VALUES (?, ?, ?)";
             $stmt2 = mysqli_prepare($conn, $sql2);
-            mysqli_stmt_bind_param($stmt2, "iss", $ID, $event, $description);
+            mysqli_stmt_bind_param($stmt2, "iss", $Student_ID, $event, $description); // 's' for string type, 'i' for integer type
             $result2 = mysqli_stmt_execute($stmt2);
 
             if ($result2) {
@@ -56,4 +54,3 @@ if (isset($_POST['event_name']) && isset($_POST['description'])) {
     header("Location: Announcement.php");
     exit();
 }
-

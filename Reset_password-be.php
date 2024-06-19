@@ -39,7 +39,7 @@ if (isset($_POST['npass']) && isset($_POST['cpass'])) {
             $email = $row['Email'];
 
             // Retrieve the student ID based on the Email
-            $stmt = $conn->prepare("SELECT ID, Password FROM students WHERE Email = ?");
+            $stmt = $conn->prepare("SELECT ID, Password FROM users WHERE Email = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $result = $stmt->get_result();

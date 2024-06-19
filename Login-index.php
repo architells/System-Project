@@ -35,7 +35,7 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
         exit();
     } else {
         // SQL query to fetch user details by Student ID
-        $sql = "SELECT * FROM students WHERE Student_ID = ? AND Role = ?";
+        $sql = "SELECT * FROM users WHERE Student_ID = ? AND Role = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ss", $s_ID, $role);
         mysqli_stmt_execute($stmt);
@@ -49,25 +49,25 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
             if (password_verify($pass, $row['Password'])) {
 
                 // Update the login time
-                $updateSql = "UPDATE students SET Login_Time = CURRENT_TIMESTAMP, Status = 'Online' WHERE Student_ID = ?";
+                $updateSql = "UPDATE users SET Login_Time = CURRENT_TIMESTAMP, Status = 'Online' WHERE Student_ID = ?";
                 $updateStmt = mysqli_prepare($conn, $updateSql);
                 mysqli_stmt_bind_param($updateStmt, "s", $s_ID);
                 mysqli_stmt_execute($updateStmt);
 
                 // Retrieve additional user profile data from student_profile
-                $sql2 = "SELECT * FROM student_profile WHERE ID=?";
+                $sql2 = "SELECT * FROM student_profile WHERE Student_ID=?";
                 $stmt2 = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt2, $sql2)) {
                     header("Location: Login.php?error=SQL Error");
                     exit();
                 } else {
-                    mysqli_stmt_bind_param($stmt2, "s", $row['ID']);
+                    mysqli_stmt_bind_param($stmt2, "s", $row['Student_ID']);
                     mysqli_stmt_execute($stmt2);
                     $result_profile = mysqli_stmt_get_result($stmt2);
                     $Student_profile = mysqli_fetch_assoc($result_profile);
 
                     // Set session variables for the user and user profile
-                    $_SESSION['ID'] = $row['ID'];
+                    $_SESSION['Student_ID'] = $row['Student_ID'];
                     $_SESSION['fname'] = $row['First_name'];
                     $_SESSION['mname'] = $row['Middle_name'];
                     $_SESSION['lname'] = $row['Last_name'];
@@ -80,6 +80,7 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
 
                     if ($Student_profile) {
                         // If user profile exists, set session variables for user profile
+                        $_SESSION['uname'] = $Student_profile['username'];
                         $_SESSION['Pnum'] = $Student_profile['Phone_Number'];
                         $_SESSION['birthday'] = $Student_profile['Birthday'];
                         $_SESSION['gender'] = $Student_profile['Gender'];
@@ -92,13 +93,13 @@ if (isset($_POST['s_ID']) && isset($_POST['password']) && isset($_POST['role']))
 
                     // Retrieve additional admin profile data if role is admin
                     if ($row['Role'] == 'admin') {
-                        $sql3 = "SELECT * FROM admin_profile WHERE ID=?";
+                        $sql3 = "SELECT * FROM admin_profile WHERE Student_ID=?";
                         $stmt3 = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($stmt3, $sql3)) {
                             header("Location: Login.php?error=SQL Error");
                             exit();
                         } else {
-                            mysqli_stmt_bind_param($stmt3, "s", $row['ID']);
+                            mysqli_stmt_bind_param($stmt3, "s", $row['Student_ID']);
                             mysqli_stmt_execute($stmt3);
                             $result_admin_profile = mysqli_stmt_get_result($stmt3);
                             $Admin_profile = mysqli_fetch_assoc($result_admin_profile);
